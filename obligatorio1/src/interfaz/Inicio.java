@@ -4,6 +4,10 @@
  */
 package interfaz;
 
+import dominio.Tablero;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+
 /**
  *
  * @author Jona
@@ -14,7 +18,20 @@ public class Inicio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Interfaz.menu();
+        //Interfaz.menu();
+        mostrarTablero();
+        //Interfaz.fuegosArtificiales();
+
+    }
+    
+    public static void mostrarTablero(){
+        try {
+            System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
+        } catch (java.io.UnsupportedEncodingException e) {
+            System.err.println("Encoding no soportado: " + e.getMessage());
+        }
+        /*Tablero t = new Tablero();
+        t.mostrarTablero();*/
     }
     
 }

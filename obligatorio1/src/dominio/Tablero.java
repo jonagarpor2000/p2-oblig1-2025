@@ -13,36 +13,57 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 public class Tablero {
+ 
+    private int filas;
+    private int columnas;
 
-    private final int FILAS = 9;
-    private final int COLUMNAS = 13;
+    public int getFilas() {
+        return filas;
+    }
+
+    public void setFilas(int filas) {
+        this.filas = filas;
+    }
+
+    public int getColumnas() {
+        return columnas;
+    }
+
+    public void setColumnas(int columnas) {
+        this.columnas = columnas;
+    }
+    
     private char[][] tablero;
 
-    public Tablero() {
-        tablero = new char[FILAS][COLUMNAS];
+    public Tablero(int filas, int columnas) {
+        this.columnas = columnas;
+        this.filas = filas;
+        tablero = new char[filas][columnas];
         inicializarTablero();
 
     }
 
     private void inicializarTablero() {
-        for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS; j++) {
+        int ancho = 4;
+        for (int i = 0; i < this.getColumnas(); i++) {
+            for (int j = 0; j < this.getColumnas(); j++) {
                 tablero[i][j] = ' '; // Por defecto, no jugable
             }
         }
 
-        int centro = COLUMNAS / 2;
-        for (int i = 0; i < FILAS; i++) {
-            int alcance = i <= FILAS / 2 ? i : FILAS - 1 - i;
+        int centro = this.getColumnas() / 2;
+        for (int i = 0; i < this.getFilas(); i++) {
+            int alcance = i <= this.getFilas() / 2 ? i : this.getFilas() - 1 - i;
             for (int j = centro - alcance; j <= centro + alcance; j += 2) {
-                tablero[i][j] = '★'; // Casilla jugable
+                tablero[i][j] = '*'; // Casilla jugable
             }
         }
     }
+    
 
     public boolean esCasillaValida(int fila, int columna) {
-        return fila >= 0 && fila < FILAS
-                && columna >= 0 && columna < COLUMNAS
+        return fila >= 0 && fila < this.getFilas()
+                && columna >= 0 && columna < this.getColumnas()
                 && tablero[fila][columna] == '.';
     }
 
@@ -54,25 +75,7 @@ public class Tablero {
         return false;
     }
 
-    public void mostrarTablero() {
-        System.out.println("  A B C D E F G H I J K L M");
-        for (int i = 0; i < FILAS; i++) {
-            System.out.print((i + 1) + " ");
-            for (int j = 0; j < COLUMNAS; j++) {
-                System.out.print(tablero[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
 
-    public static void main(String[] args) {
-        try {
-            System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
-        } catch (java.io.UnsupportedEncodingException e) {
-            System.err.println("Encoding no soportado: " + e.getMessage());
-        }
-        Tablero t = new Tablero();
-        t.mostrarTablero();
 
-    }
+
 }

@@ -4,6 +4,7 @@
  */
 package interfaz;
 import java.util.*;
+import dominio.Tablero;
 /**
  *
  * @author Nahuel Paroldo
@@ -29,7 +30,9 @@ public class Interfaz {
         }
     }
     
+    /*
     
+    */
     public static int solicitarNum(String mensaje, int minimo, int maximo){
         Scanner in = new Scanner(System.in);
         boolean ok = false;
@@ -51,5 +54,25 @@ public class Interfaz {
             }
         }
         return num;
+    }
+    
+    public static void fuegosArtificiales(){
+        //Logica
+    }
+    
+    public static void mostrarTablero() {
+        int FILAS = 9;
+        int COLUMNAS = 13;
+        //private final int COLUMNAS = 13;
+        
+        Tablero t = new Tablero(9,13);
+        System.out.println("  A B C D E F G H I J K L M");
+        for (int i = 0; i < FILAS; i++) {
+            System.out.print((i + 1) + " ");
+            for (int j = 0; j < COLUMNAS; j++) {
+                //System.out.print(tablero[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }

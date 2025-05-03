@@ -9,10 +9,20 @@ package dominio;
  * @author Nahuel Paroldo
  * @author Jonathan Garcia
  */
-public class Jugador {
+public class Jugador implements Comparable<Jugador>{
     private int puntaje;
     private String nombre;
     private int edad;
+    private int racha;
+    
+    
+    public int getRacha() {
+        return racha;
+    }
+
+    public void setRacha(int racha) {
+        this.racha = racha;
+    }
 
     public int getPuntaje() {
         return puntaje;
@@ -36,6 +46,26 @@ public class Jugador {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+    
+    public void reiniciarRacha() {
+        this.racha = 0;
+        setRacha(0);
+    }
+    
+    public void anotarVictoria() {
+        this.puntaje++;
+        this.racha++;
+    }
+    
+    @Override
+    public int compareTo(Jugador otro) {
+        return otro.puntaje - this.getPuntaje();
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%s (edad: %d) - Ganadas: %d, Racha: %d", nombre, edad, puntaje, racha);
     }
     
     
