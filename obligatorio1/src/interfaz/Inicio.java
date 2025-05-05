@@ -4,13 +4,16 @@
  */
 package interfaz;
 
+import dominio.Jugador;
+import dominio.Sistema;
 import dominio.Tablero;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 /**
  *
- * @author Jona
+ * @author Nahuel Paroldo
+ * @author Jonathan Garcia
  */
 public class Inicio {
 
@@ -18,8 +21,10 @@ public class Inicio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Interfaz.menu();
-        mostrarTablero();
+        Sistema sys = new Sistema();
+        Interfaz.menu(sys);
+        sys.registrarJugador(new Jugador("Roberto",18));
+        //mostrarTablero();
         //Interfaz.fuegosArtificiales();
 
     }
