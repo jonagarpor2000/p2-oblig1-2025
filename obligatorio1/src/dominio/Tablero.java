@@ -35,6 +35,14 @@ public class Tablero {
     
     private char[][] tablero;
 
+    public char[][] getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(char[][] tablero) {
+        this.tablero = tablero;
+    }
+
     public Tablero(int filas, int columnas) {
         this.columnas = columnas;
         this.filas = filas;
@@ -45,7 +53,7 @@ public class Tablero {
 
     private void inicializarTablero() {
         int ancho = 4;
-        for (int i = 0; i < this.getColumnas(); i++) {
+        for (int i = 0; i < this.getFilas(); i++) {
             for (int j = 0; j < this.getColumnas(); j++) {
                 tablero[i][j] = ' '; // Por defecto, no jugable
             }

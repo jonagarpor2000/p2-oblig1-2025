@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package interfaz;
+import dominio.Jugador;
+import dominio.Sistema;
 import java.util.*;
 import dominio.Tablero;
 /**
@@ -13,7 +15,8 @@ import dominio.Tablero;
 
 //nombre + Nroestudiante en interfaz
 public class Interfaz {
-    public static void menu(){
+    public static void menu(Sistema sys){
+        
         Scanner in = new Scanner(System.in);
         int op = 0;
         while(op != 5){
@@ -27,12 +30,37 @@ public class Interfaz {
             System.out.println("4 - Ver ranking\n");
             System.out.println("5 - Salir del juego\n");
             op = solicitarNum("Ingrese opcion (1-5) ",1,5);
+            switch(op){
+                case 1:
+                    sys.registrarJugador(ingresoJugador());
+                    break;
+                case 2:
+                    System.out.println("El ranking de jugadores es el siguiente :");
+                    sys.ordenarScoreDec();
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+            }
         }
+        
+        
     }
     
-    /*
-    
-    */
+    public static Jugador ingresoJugador (){
+        Scanner in = new Scanner (System.in);
+        String nombre = "";
+        int edad = Integer.MIN_VALUE;
+        System.out.println("Ingrese los datos solicitados: ");
+        System.out.println("Ingrese su nickname: ");
+        nombre = in.nextLine();
+        edad = solicitarNum("Ingrese edad del jugador: ",1,120);
+        return new Jugador(nombre,edad);
+    }
+
     public static int solicitarNum(String mensaje, int minimo, int maximo){
         Scanner in = new Scanner(System.in);
         boolean ok = false;
@@ -70,9 +98,16 @@ public class Interfaz {
         for (int i = 0; i < FILAS; i++) {
             System.out.print((i + 1) + " ");
             for (int j = 0; j < COLUMNAS; j++) {
-                //System.out.print(tablero[i][j] + " ");
+                System.out.print(t.getTablero()[i][j] + " ");
             }
             System.out.println();
+        }
+    }
+    
+    public static void listadoJugadores(Sistema sys){
+        System.out.println("\nLista de jugadores\n------------");
+        for (Jugador gamer : sys.getListaJugadores()){
+            System.out.println(gamer+"\n");
         }
     }
 }

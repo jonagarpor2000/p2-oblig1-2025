@@ -4,6 +4,8 @@
  */
 package dominio;
 
+import java.util.Comparator;
+
 /**
  *
  * @author Nahuel Paroldo
@@ -15,6 +17,12 @@ public class Jugador implements Comparable<Jugador>{
     private int edad;
     private int racha;
     
+    public Jugador (String nombre,int edad){
+        this.nombre = nombre;
+        this.edad = edad;
+        this.puntaje = 0;
+        this.racha = 0;
+    }
     
     public int getRacha() {
         return racha;
@@ -48,6 +56,7 @@ public class Jugador implements Comparable<Jugador>{
         this.edad = edad;
     }
     
+    
     public void reiniciarRacha() {
         this.racha = 0;
         setRacha(0);
@@ -67,6 +76,8 @@ public class Jugador implements Comparable<Jugador>{
     public String toString() {
         return String.format("%s (edad: %d) - Ganadas: %d, Racha: %d", nombre, edad, puntaje, racha);
     }
+    
+
     
     
 }
