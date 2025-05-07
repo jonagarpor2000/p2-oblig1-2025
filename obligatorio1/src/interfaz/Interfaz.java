@@ -98,7 +98,7 @@ public class Interfaz {
         for (int i = 0; i < FILAS; i++) {
             System.out.print((i + 1) + " ");
             for (int j = 0; j < COLUMNAS; j++) {
-                //System.out.print(tablero[i][j] + " ");
+                System.out.print(t.getTablero()[i][j] + " ");
             }
             System.out.println();
         }

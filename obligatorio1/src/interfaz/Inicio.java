@@ -21,10 +21,10 @@ public class Inicio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Sistema sys = new Sistema();
-        Interfaz.menu(sys);
-        sys.registrarJugador(new Jugador("Roberto",18));
-        //mostrarTablero();
+        //Sistema sys = new Sistema();
+        //Interfaz.menu(sys);
+        //sys.registrarJugador(new Jugador("Roberto",18));
+        mostrarTablero();        
         //Interfaz.fuegosArtificiales();
 
     }
@@ -32,11 +32,11 @@ public class Inicio {
     public static void mostrarTablero(){
         try {
             System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
+            Interfaz.mostrarTablero();
         } catch (java.io.UnsupportedEncodingException e) {
             System.err.println("Encoding no soportado: " + e.getMessage());
         }
-        /*Tablero t = new Tablero();
-        t.mostrarTablero();*/
+
     }
     
 }
