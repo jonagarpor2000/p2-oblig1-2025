@@ -77,6 +77,12 @@ public class Jugador implements Comparable<Jugador>{
         return String.format("%s (edad: %d) - Ganadas: %d, Racha: %d", nombre, edad, puntaje, racha);
     }
     
+    @Override
+    public boolean equals(Object obj){
+        Jugador player = (Jugador)obj;
+        return this.getNombre()== player.getNombre();
+    }
+    
 
     
     
