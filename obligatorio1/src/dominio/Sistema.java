@@ -18,8 +18,6 @@ public class Sistema {
     private boolean requiereContacto = false;
     private boolean largoFijo = true;
     private int largoDefault = 4;
-    private int minLargo = 1;
-    private int maxLargo = 4;
     private int maximoBandas = 10;
     private int numTableros = 1;
 
@@ -47,21 +45,8 @@ public class Sistema {
         this.largoDefault = largoDefault;
     }
 
-    public int getMinLargo() {
-        return minLargo;
-    }
 
-    public void setMinLargo(int minLargo) {
-        this.minLargo = minLargo;
-    }
 
-    public int getMaxLargo() {
-        return maxLargo;
-    }
-
-    public void setMaxLargo(int maxLargo) {
-        this.maxLargo = maxLargo;
-    }
 
     public int getMaximoBandas() {
         return maximoBandas;
@@ -92,6 +77,9 @@ public class Sistema {
         listaJugadores = new ArrayList<>();
     }
     
+    public void comprobarMinJugadores(){
+    
+    }
    
     public void ordenarScoreDec(){
         Collections.sort(listaJugadores, new CriterioScoreDecreciente());
@@ -102,6 +90,17 @@ public class Sistema {
     public int compare(Jugador p1, Jugador p2){
         return p2.getPuntaje()-p2.getPuntaje();
         }
+    }
+    
+    public void setConfiguraciones(int largoBandas, boolean contacto,int cantBandas,int cantTableros){
+        this.setLargoDefault(largoBandas);
+        this.setRequiereContacto(contacto);
+        this.setMaximoBandas(cantBandas);
+        this.setNumTableros(cantTableros);
+    }
+    
+    public void comenzarPartida(){
+    
     }
 }
 

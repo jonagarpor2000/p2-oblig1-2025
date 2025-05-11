@@ -36,6 +36,8 @@ public class Interfaz {
                     break;
                 case 2:
                     
+                    
+                    sys.setConfiguraciones(op, true, op, op);
                     break;
                 case 3:
                     
@@ -72,6 +74,28 @@ public class Interfaz {
     }
 
     public static int solicitarNum(String mensaje, int minimo, int maximo){
+        Scanner in = new Scanner(System.in);
+        boolean ok = false;
+        int num = 0;
+        while (!ok){
+            try{
+                System.out.println(mensaje);
+                num = in.nextInt();
+                if(num<minimo || num > maximo){
+                    System.out.println("Valor fuera de rango( "+minimo+" - "+ maximo + " )");
+                }else{
+                    ok = true;
+                }
+                
+                
+            }catch(InputMismatchException e){
+                System.out.println("Por favor, ingrese solo numeros");
+                in.nextLine();
+            }
+        }
+        return num;
+    }
+    public static int solicitarBoolean(String mensaje){
         Scanner in = new Scanner(System.in);
         boolean ok = false;
         int num = 0;
@@ -130,5 +154,15 @@ public class Interfaz {
        }
        return existe;
    }
-   
+    
+    public static void setearConfigs(){
+        System.out.println("Establezca las configuraciones para la partida: ");
+        int largobandas = solicitarNum ("Escriba el largo de movilidad que tendra con las bandas",1,4);
+        
+        boolean contacto;
+        int Maxbandas = solicitarNum ("Escriba el maximo de bandas para jugar",1,Integer.MAX_VALUE);
+        int cantTableros= solicitarNum ("Escriba la cantidad de tableros con la que desea jugar",1,3);
+        
+        
+    }
 }
