@@ -128,6 +128,7 @@ public class Interfaz {
     }
 
     public static void mostrarTablero() {
+        int test1 = 0;
         int FILAS = 7;
         int COLUMNAS = 13;
         //private final int COLUMNAS = 13;
