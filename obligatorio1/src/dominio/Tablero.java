@@ -52,24 +52,6 @@ public class Tablero {
     }
 
     private void inicializarTablero() {
-        int ancho = 4;
-        for (int i = 0; i < this.getFilas(); i++) {
-            for (int j = 0; j < this.getColumnas(); j++) {
-                tablero[i][j] = ' '; // Por defecto, no jugable
-            }
-        }
-
-        int centro = this.getColumnas() / 2;
-        for (int i = 0; i < this.getFilas(); i++) {
-            int alcance = i <= this.getFilas() / 2 ? i : this.getFilas() - 1 - i;
-            for (int j = centro - alcance; j <= centro + alcance; j += 2) {
-                tablero[i][j] = '*'; // Casilla jugable
-            }
-        }
-    }
-    
-    /*    private void inicializarTablero() {
-
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
                 tablero[i][j] = ' ';
@@ -87,7 +69,8 @@ public class Tablero {
                 tablero[i][j] = '*';
             }
         }
-    }*/
+    }
+    
 
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()

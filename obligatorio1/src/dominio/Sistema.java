@@ -99,8 +99,8 @@ public class Sistema {
         this.setNumTableros(cantTableros);
     }
     
-    public void comenzarPartida(){
-    
+    public void empezarPartida(){
+        
     }
 }
 

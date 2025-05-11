@@ -108,11 +108,12 @@ public class Interfaz {
             try {
                 System.out.println(mensaje);
                 num = in.nextInt();
-                if (num < minimo || num > maximo) {
+                /*if (num < minimo || num > maximo) {
                     System.out.println("Valor fuera de rango( " + minimo + " - " + maximo + " )");
                 } else {
                     ok = true;
-                }
+                }*/
+                ok = true;
 
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, ingrese solo numeros");
@@ -127,11 +128,11 @@ public class Interfaz {
     }
 
     public static void mostrarTablero() {
-        int FILAS = 9;
+        int FILAS = 7;
         int COLUMNAS = 13;
         //private final int COLUMNAS = 13;
 
-        Tablero t = new Tablero(9, 13);
+        Tablero t = new Tablero(FILAS, COLUMNAS);
         System.out.println("  A B C D E F G H I J K L M");
         for (int i = 0; i < FILAS; i++) {
             System.out.print((i + 1) + " ");
