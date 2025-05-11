@@ -24,19 +24,8 @@ public class Inicio {
         Sistema sys = new Sistema();
         Interfaz.menu(sys);
         sys.registrarJugador(new Jugador("Roberto",18));
-        //mostrarTablero();        
-        //Interfaz.fuegosArtificiales();
-
     }
     
-    public static void mostrarTablero(){
-        try {
-            System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
-            Interfaz.mostrarTablero();
-        } catch (java.io.UnsupportedEncodingException e) {
-            System.err.println("Encoding no soportado: " + e.getMessage());
-        }
-        
-    }
+
     
 }

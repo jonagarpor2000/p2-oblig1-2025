@@ -8,6 +8,8 @@ import dominio.Jugador;
 import dominio.Sistema;
 import java.util.*;
 import dominio.Tablero;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -53,6 +55,8 @@ public class Interfaz {
                     System.out.println(sys.getListaJugadores());
                     break;
                 case 5:
+                    fuegosArtificiales();
+                    //cargarTablero();
                     break;
                 default:
                     System.out.println("El valor introducido es inválido");
@@ -124,11 +128,17 @@ public class Interfaz {
         return num==1;
     }
 
-    public static void fuegosArtificiales() {
-        //Logica
+        public static void mostrarTablero(){
+        try {
+            System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
+            cargarTablero();
+        } catch (java.io.UnsupportedEncodingException e) {
+            System.err.println("Encoding no soportado: " + e.getMessage());
+        }
+        
     }
 
-    public static void mostrarTablero() {
+    public static void cargarTablero() {
         int FILAS = 7;
         int COLUMNAS = 13;
         //private final int COLUMNAS = 13;
@@ -160,6 +170,82 @@ public class Interfaz {
         }
         return existe;
     }
+
+    
+    /* Método para mostrar la animación de fuegos artificiales
+       Se utilizo Grok con el siguiente prompt: "Al terminar una partida, si hay ganador mostrar efecto de
+       animación con desplazamiento de “fuegos artificiales” con colores en consola por un breve tiempo (se
+       sugiere utilizar en la consola el font Courier New) en Java*/
+
+       public static void fuegosArtificiales() {
+        // Colores ANSI para la consola
+        String RESET = "\033[0m";
+        String[] COLORS = {
+            "\033[31m", // Rojo
+            "\033[32m", // Verde
+            "\033[33m", // Amarillo
+            "\033[34m", // Azul
+            "\033[35m", // Magenta
+            "\033[36m", // Cian
+        };
+
+        // Símbolos para simular fuegos artificiales
+        String[] FIREWORK_CHARS = {"", "+", "o", "."};
+
+        // Dimensiones de la "pantalla" en la consola
+        int width = 50;
+        int height = 10;
+
+        // Duración de la animación (en milisegundos)
+        int duration = 3000;
+        long startTime = System.currentTimeMillis();
+
+        try {
+            // Recomendación de fuente
+            System.out.println("Se recomienda usar la fuente 'Courier New' en la consola para mejor visualización.");
+
+            // Bucle de animación
+            while (System.currentTimeMillis() - startTime < duration) {
+                // Limpia la consola (funciona en terminales compatibles con ANSI)
+                System.out.print("\033[H\033[2J");
+
+                // Genera varios "fuegos" en cada cuadro
+                for (int i = 0; i < 5; i++) {
+                    // Posición aleatoria para el fuego artificial
+                    int x = (int) (Math.random() * width);
+                    int y = (int) (Math.random() * height);
+
+                    // Selecciona un color y símbolo aleatorio
+                    String color = COLORS[(int) (Math.random() * COLORS.length)];
+                    String symbol = FIREWORK_CHARS[(int) (Math.random() * FIREWORK_CHARS.length)];
+
+                    // Imprime el fuego artificial en la posición calculada
+                    for (int row = 0; row < height; row++) {
+                        for (int col = 0; col < width; col++) {
+                            if (row == y && col == x) {
+                                System.out.print(color + symbol + RESET);
+                            } else {
+                                // Imprime espacios para simular movimiento
+                                System.out.print(" ");
+                            }
+                        }
+                        System.out.println();
+                    }
+                }
+
+                // Pausa para controlar la velocidad de la animación
+                Thread.sleep(600);
+            }
+
+            // Limpia la consola al final
+            System.out.print("\033[H\033[2J");
+            System.out.println("¡Fin de la animación de fuegos artificiales!");
+
+        } catch (InterruptedException e) {
+            System.err.println("Error en la animación: " + e.getMessage());
+        }
+    }
+
 
     public static void setearConfigs(Sistema sys) {
         System.out.println("Establezca las configuraciones para la partida: ");

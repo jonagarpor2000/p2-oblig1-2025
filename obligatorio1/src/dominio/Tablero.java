@@ -67,6 +67,7 @@ private void inicializarTablero() {
             int j = colInicial + k * 2;
             tablero[i][j] = '*';
         }
+        System.out.println("\n");
     }
 }
 
