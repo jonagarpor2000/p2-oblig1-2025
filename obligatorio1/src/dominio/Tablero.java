@@ -68,6 +68,26 @@ public class Tablero {
         }
     }
     
+    /*    private void inicializarTablero() {
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                tablero[i][j] = ' ';
+            }
+        }
+
+        int centro = columnas / 2;
+
+        for (int i = 0; i < filas; i++) {
+            int alcance = i <= filas / 2 ? i : filas - 1 - i;
+            int ancho = filas / 2 + 1 + alcance;
+            int inicio = centro - ancho / 2;
+
+            for (int j = inicio; j < inicio + ancho; j++) {
+                tablero[i][j] = '*';
+            }
+        }
+    }*/
 
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()
