@@ -13,7 +13,7 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 public class Tablero {
- 
+
     private int filas;
     private int columnas;
 
@@ -32,7 +32,7 @@ public class Tablero {
     public void setColumnas(int columnas) {
         this.columnas = columnas;
     }
-    
+
     private char[][] tablero;
 
     public char[][] getTablero() {
@@ -51,26 +51,25 @@ public class Tablero {
 
     }
 
-    private void inicializarTablero() {
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                tablero[i][j] = ' ';
-            }
-        }
+private void inicializarTablero() {
+    for (int i = 0; i < filas; i++)
+        for (int j = 0; j < columnas; j++)
+            tablero[i][j] = ' ';
 
-        int centro = columnas / 2;
+    int centro = columnas / 2; 
 
-        for (int i = 0; i < filas; i++) {
-            int alcance = i <= filas / 2 ? i : filas - 1 - i;
-            int ancho = filas / 2 + 1 + alcance;
-            int inicio = centro - (ancho - 1);
+    for (int i = 0; i < filas; i++) {
+        int alcance     = i <= filas/2 ? i : filas - 1 - i;
+        int nEstrellas  = filas/2 + 1 + alcance;      
+        int colInicial          = centro - (nEstrellas - 1); 
 
-            for (int j = inicio; j < inicio + ancho; j++) {
-                tablero[i][j] = '*';
-            }
+        for (int k = 0; k < nEstrellas; k++) {
+            int j = colInicial + k * 2;
+            tablero[i][j] = '*';
         }
     }
-    
+}
+
 
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()
@@ -85,8 +84,5 @@ public class Tablero {
         }
         return false;
     }
-
-
-
 
 }
