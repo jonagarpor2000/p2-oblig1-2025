@@ -63,7 +63,7 @@ public class Tablero {
         for (int i = 0; i < filas; i++) {
             int alcance = i <= filas / 2 ? i : filas - 1 - i;
             int ancho = filas / 2 + 1 + alcance;
-            int inicio = centro - ancho / 2;
+            int inicio = centro - (ancho - 1);
 
             for (int j = inicio; j < inicio + ancho; j++) {
                 tablero[i][j] = '*';
