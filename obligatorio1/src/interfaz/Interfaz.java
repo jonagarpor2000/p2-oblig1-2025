@@ -32,17 +32,23 @@ public class Interfaz {
             op = solicitarNum("Ingrese opcion (1-5) ",1,5);
             switch(op){
                 case 1:
-                    sys.registrarJugador(ingresoJugador());
+                    sys.registrarJugador(ingresoJugador(sys));
                     break;
                 case 2:
-                    System.out.println("El ranking de jugadores es el siguiente :");
-                    sys.ordenarScoreDec();
+                    
                     break;
                 case 3:
                     
                     break;
                 case 4:
-                    
+                    System.out.println("El ranking de jugadores es el siguiente :");
+                    sys.ordenarScoreDec();
+                    System.out.println(sys.getListaJugadores());
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("El valor introducido es inválido");
                     break;
             }
         }
@@ -50,13 +56,17 @@ public class Interfaz {
         
     }
     
-    public static Jugador ingresoJugador (){
+    public static Jugador ingresoJugador (Sistema sys){
         Scanner in = new Scanner (System.in);
-        String nombre = "";
+        String nombre;
         int edad = Integer.MIN_VALUE;
         System.out.println("Ingrese los datos solicitados: ");
         System.out.println("Ingrese su nickname: ");
         nombre = in.nextLine();
+        while(jugadorExistente(nombre,sys)){
+            System.out.println("El jugador "+nombre+" existe \nPruebe con otro nombre");
+            nombre = in.nextLine();        
+        }
         edad = solicitarNum("Ingrese edad del jugador: ",1,120);
         return new Jugador(nombre,edad);
     }
@@ -110,4 +120,15 @@ public class Interfaz {
             System.out.println(gamer+"\n");
         }
     }
+    
+    public static boolean jugadorExistente(String nombre, Sistema sys) {
+       boolean existe = false;
+        for (Jugador j : sys.getListaJugadores()) {
+           if (j.getNombre().equalsIgnoreCase(nombre)) {
+               existe = true;
+           }
+       }
+       return existe;
+   }
+   
 }
