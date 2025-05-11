@@ -97,6 +97,7 @@ public class Sistema {
         Collections.sort(listaJugadores, new CriterioScoreDecreciente());
     }
     
+    
     private class CriterioScoreDecreciente implements Comparator<Jugador>{
     @Override
     public int compare(Jugador p1, Jugador p2){

@@ -38,6 +38,11 @@ public class Interfaz {
                     
                     break;
                 case 3:
+                    if(sys.getListaJugadores().size() < 2){
+                        System.out.println("Se requieren al menos 2 jugadores para comenzar el juego");
+                    }else{
+                        sys.empezarPartida();
+                    }
                     
                     break;
                 case 4:
@@ -131,4 +136,6 @@ public class Interfaz {
        return existe;
    }
    
+    
+    
 }

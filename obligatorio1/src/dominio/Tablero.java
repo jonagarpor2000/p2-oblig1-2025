@@ -13,7 +13,7 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
 public class Tablero {
- 
+
     private int filas;
     private int columnas;
 
@@ -32,16 +32,8 @@ public class Tablero {
     public void setColumnas(int columnas) {
         this.columnas = columnas;
     }
-    
+
     private char[][] tablero;
-
-    public char[][] getTablero() {
-        return tablero;
-    }
-
-    public void setTablero(char[][] tablero) {
-        this.tablero = tablero;
-    }
 
     public Tablero(int filas, int columnas) {
         this.columnas = columnas;
@@ -52,22 +44,25 @@ public class Tablero {
     }
 
     private void inicializarTablero() {
-        int ancho = 4;
-        for (int i = 0; i < this.getFilas(); i++) {
-            for (int j = 0; j < this.getColumnas(); j++) {
-                tablero[i][j] = ' '; // Por defecto, no jugable
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                tablero[i][j] = ' ';
             }
         }
 
-        int centro = this.getColumnas() / 2;
-        for (int i = 0; i < this.getFilas(); i++) {
-            int alcance = i <= this.getFilas() / 2 ? i : this.getFilas() - 1 - i;
-            for (int j = centro - alcance; j <= centro + alcance; j += 2) {
-                tablero[i][j] = '*'; // Casilla jugable
+        int centro = columnas / 2;
+
+        for (int i = 0; i < filas; i++) {
+            int alcance = i <= filas / 2 ? i : filas - 1 - i;
+            int ancho = filas / 2 + 1 + alcance;
+            int inicio = centro - ancho / 2;
+
+            for (int j = inicio; j < inicio + ancho; j++) {
+                tablero[i][j] = '*';
             }
         }
     }
-    
 
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()
@@ -82,8 +77,5 @@ public class Tablero {
         }
         return false;
     }
-
-
-
 
 }
