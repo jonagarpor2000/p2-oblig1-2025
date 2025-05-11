@@ -38,8 +38,7 @@ public class Interfaz {
                     sys.registrarJugador(ingresoJugador(sys));
                     break;
                 case 2:
-
-                    sys.setConfiguraciones(op, true, op, op);
+                    setearConfigs(sys);
                     break;
                 case 3:
                     if (sys.getListaJugadores().size() < 2) {
@@ -100,27 +99,29 @@ public class Interfaz {
         return num;
     }
 
-    public static int solicitarBoolean(String mensaje) {
+    public static boolean solicitarBoolean(String mensaje) {
         Scanner in = new Scanner(System.in);
         boolean ok = false;
         int num = 0;
+        boolean binario = false;
         while (!ok) {
             try {
                 System.out.println(mensaje);
                 num = in.nextInt();
-                /*if (num < minimo || num > maximo) {
-                    System.out.println("Valor fuera de rango( " + minimo + " - " + maximo + " )");
+                if (num < 0 || num > 1) {
+                    System.out.println("Valor fuera de rango, debe ser 0 (para indicar false) o 1 (para indicar true)");
                 } else {
                     ok = true;
-                }*/
-                ok = true;
+                }
+                
+               
 
             } catch (InputMismatchException e) {
                 System.out.println("Por favor, ingrese solo numeros");
                 in.nextLine();
             }
         }
-        return num;
+        return num==1;
     }
 
     public static void fuegosArtificiales() {
@@ -160,13 +161,12 @@ public class Interfaz {
         return existe;
     }
 
-    public static void setearConfigs() {
+    public static void setearConfigs(Sistema sys) {
         System.out.println("Establezca las configuraciones para la partida: ");
         int largobandas = solicitarNum("Escriba el largo de movilidad que tendra con las bandas", 1, 4);
-
-        boolean contacto;
+        boolean contacto = solicitarBoolean("Escriba 1 si desea el contacto con las bandas anteriores o escriba 0 si desea que la banda sea colocada en cualquier ubicación");
         int Maxbandas = solicitarNum("Escriba el maximo de bandas para jugar", 1, Integer.MAX_VALUE);
         int cantTableros = solicitarNum("Escriba la cantidad de tableros con la que desea jugar", 1, 3);
-
+        sys.setConfiguraciones(largobandas, contacto, Maxbandas, cantTableros);
     }
 }

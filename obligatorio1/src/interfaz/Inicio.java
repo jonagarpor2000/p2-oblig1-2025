@@ -21,10 +21,10 @@ public class Inicio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-/*        Sistema sys = new Sistema();
+        Sistema sys = new Sistema();
         Interfaz.menu(sys);
-        sys.registrarJugador(new Jugador("Roberto",18));*/
-        mostrarTablero();        
+        sys.registrarJugador(new Jugador("Roberto",18));
+        //mostrarTablero();        
         //Interfaz.fuegosArtificiales();
 
     }
@@ -36,7 +36,7 @@ public class Inicio {
         } catch (java.io.UnsupportedEncodingException e) {
             System.err.println("Encoding no soportado: " + e.getMessage());
         }
-
+        
     }
     
 }
