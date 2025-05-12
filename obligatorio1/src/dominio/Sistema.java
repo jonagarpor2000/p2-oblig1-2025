@@ -14,6 +14,7 @@ import java.util.*;
 
 //Configuracion queda aca adentro  y partida tambien
 public class Sistema {
+    
     private final ArrayList <Jugador> listaJugadores;
     private boolean requiereContacto = false;
     private boolean largoFijo = true;

@@ -19,8 +19,8 @@ import java.nio.charset.StandardCharsets;
 
 //nombre + Nroestudiante en interfaz
 public class Interfaz {
-    private Jugador[] players = new Jugador [2];
-
+    public Jugador j1 = new Jugador (null,0);
+    public Jugador j2 = new Jugador (null,0);
     public void menu(Sistema sys) {
 
         Scanner in = new Scanner(System.in);
@@ -28,6 +28,9 @@ public class Interfaz {
         while (op != 5) {
             System.out.println("--------------------------------------------------------");
             System.out.println("\t Triangulos - Main menu");
+            System.out.println("\t Desarrollado por: "
+                    + "\n \tJonathan Garcia - 307938"
+                    + "\n \tNahuel Paroldo - 64814");
             System.out.println("--------------------------------------------------------\n");
             System.out.println(" Seleccione su opcion:");
             System.out.println("1 - Registrar jugador\n");
@@ -154,13 +157,6 @@ public class Interfaz {
         }
     }
 
-    public void listadoJugadores(Sistema sys) {
-        System.out.println("\nLista de jugadores\n------------");
-        for (Jugador gamer : sys.getListaJugadores()) {
-            System.out.println(gamer + "\n");
-        }
-    }
-
     public boolean jugadorExistente(String nombre, Sistema sys) {
         boolean existe = false;
         for (Jugador j : sys.getListaJugadores()) {
@@ -174,12 +170,7 @@ public class Interfaz {
     public void elegirJugador(Sistema sys){
         ArrayList <Jugador> res = solicitarEntradaJugador(sys.getListaJugadores(),sys);
         System.out.println("Ahora repita el procedimiento con el segundo jugador");
-        res = solicitarEntradaJugador(res,sys);
-        
-        for (int i = 0; i < players.length;i++){
-            System.out.println("Tengo "+players[i].getNombre()+" jugador nro"+i);
-        }
-        
+        res = solicitarEntradaJugador(res,sys); 
     }
     
     public ArrayList <Jugador> solicitarEntradaJugador(ArrayList<Jugador> playerexcluded,Sistema sys){
@@ -194,15 +185,16 @@ public class Interfaz {
         
         nombre = in.nextLine();
         if(jugadorExistente(nombre,sys)){
-        while(iterador.hasNext()){
-            if(iterador.next().equals(nombre)&& players[0]!=null){
-                System.out.println("Puedo recorrer a"+iterador.next().getNombre()+" ?");
-                players[0] = iterador.next();
-            }else{
-                players[1] = iterador.next();
+           for (Jugador j : playerexcluded) {
+               if(j.getNombre().contentEquals(nombre) && (j1.getNombre()==null)){
+                  j1 = obtenerJugador(sys,nombre);
+                  
+               }else if (j.getNombre().contentEquals(nombre)){
+                   j2 = obtenerJugador(sys,nombre);
+               }
+               
             }
-        }
-            res = sys.ObtenerJugadoresExcluidos(nombre, playerexcluded);
+                res = sys.ObtenerJugadoresExcluidos(nombre, playerexcluded);
         }else{
             while(!jugadorExistente(nombre,sys)){
                 System.out.println("El jugador "+nombre+ "no existe.");
@@ -216,6 +208,15 @@ public class Interfaz {
         return res;
         
     
+    }
+    
+    public Jugador obtenerJugador(Sistema sys,String nombre){
+        for (Jugador j : sys.getListaJugadores()) {
+          if (j.getNombre().equalsIgnoreCase(nombre)) {
+              return j;
+          }
+      }
+      return null;
     }
 
     
