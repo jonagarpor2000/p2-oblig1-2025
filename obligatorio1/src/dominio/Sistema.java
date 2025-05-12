@@ -99,8 +99,16 @@ public class Sistema {
         this.setNumTableros(cantTableros);
     }
     
-    public void empezarPartida(){
-        
+    
+    
+    public ArrayList <Jugador> ObtenerJugadoresExcluidos(String nombre, ArrayList<Jugador> playerexcluded){
+        ArrayList <Jugador> res = new ArrayList<>();
+        for (Jugador jugador : playerexcluded) {
+            if (!(jugador.getNombre().equals(nombre))) {
+                res.add(jugador);
+            }
+        }
+        return res;
     }
 }
 

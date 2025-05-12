@@ -19,8 +19,9 @@ import java.nio.charset.StandardCharsets;
 
 //nombre + Nroestudiante en interfaz
 public class Interfaz {
+    private Jugador[] players = new Jugador [2];
 
-    public static void menu(Sistema sys) {
+    public void menu(Sistema sys) {
 
         Scanner in = new Scanner(System.in);
         int op = 0;
@@ -46,7 +47,7 @@ public class Interfaz {
                     if (sys.getListaJugadores().size() < 2) {
                         System.out.println("Se requieren al menos 2 jugadores para comenzar el juego");
                     } else {
-                        sys.empezarPartida();
+                        empezarPartida(sys);
                     }
                     break;
                 case 4:
@@ -55,8 +56,8 @@ public class Interfaz {
                     System.out.println(sys.getListaJugadores());
                     break;
                 case 5:
-                    fuegosArtificiales();
-                    //cargarTablero();
+                    //fuegosArtificiales();
+                    cargarTablero();
                     break;
                 default:
                     System.out.println("El valor introducido es inválido");
@@ -103,11 +104,10 @@ public class Interfaz {
         return num;
     }
 
-    public static boolean solicitarBoolean(String mensaje) {
+    public static boolean solicitarBoolean(String mensaje) {    //Revisar si se puede cambiar Scanner por nextBoolean
         Scanner in = new Scanner(System.in);
         boolean ok = false;
         int num = 0;
-        boolean binario = false;
         while (!ok) {
             try {
                 System.out.println(mensaje);
@@ -170,6 +170,53 @@ public class Interfaz {
         }
         return existe;
     }
+    
+    public void elegirJugador(Sistema sys){
+        ArrayList <Jugador> res = solicitarEntradaJugador(sys.getListaJugadores(),sys);
+        System.out.println("Ahora repita el procedimiento con el segundo jugador");
+        res = solicitarEntradaJugador(res,sys);
+        
+        for (int i = 0; i < players.length;i++){
+            System.out.println("Tengo "+players[i].getNombre()+" jugador nro"+i);
+        }
+        
+    }
+    
+    public ArrayList <Jugador> solicitarEntradaJugador(ArrayList<Jugador> playerexcluded,Sistema sys){
+        Scanner in = new Scanner(System.in);
+        ArrayList <Jugador> res = new ArrayList<>();
+        String nombre;
+        System.out.println("Elija su jugador de la lista indicando su nombre\n");
+        Iterator<Jugador> iterador = playerexcluded.iterator();
+        while(iterador.hasNext()){
+            System.out.println(iterador.next());
+        }
+        
+        nombre = in.nextLine();
+        if(jugadorExistente(nombre,sys)){
+        while(iterador.hasNext()){
+            if(iterador.next().equals(nombre)&& players[0]!=null){
+                System.out.println("Puedo recorrer a"+iterador.next().getNombre()+" ?");
+                players[0] = iterador.next();
+            }else{
+                players[1] = iterador.next();
+            }
+        }
+            res = sys.ObtenerJugadoresExcluidos(nombre, playerexcluded);
+        }else{
+            while(!jugadorExistente(nombre,sys)){
+                System.out.println("El jugador "+nombre+ "no existe.");
+                System.out.println("Ingrese un nombre valido");
+                nombre = in.nextLine();
+            }
+            res = sys.ObtenerJugadoresExcluidos(nombre, playerexcluded);
+            
+        }
+        
+        return res;
+        
+    
+    }
 
     
     /* Método para mostrar la animación de fuegos artificiales
@@ -177,7 +224,7 @@ public class Interfaz {
        animación con desplazamiento de “fuegos artificiales” con colores en consola por un breve tiempo (se
        sugiere utilizar en la consola el font Courier New) en Java*/
 
-       public static void fuegosArtificiales() {
+       public void fuegosArtificiales(String nombre) {
         // Colores ANSI para la consola
         String RESET = "\033[0m";
         String[] COLORS = {
@@ -201,9 +248,6 @@ public class Interfaz {
         long startTime = System.currentTimeMillis();
 
         try {
-            // Recomendación de fuente
-            System.out.println("Se recomienda usar la fuente 'Courier New' en la consola para mejor visualización.");
-
             // Bucle de animación
             while (System.currentTimeMillis() - startTime < duration) {
                 // Limpia la consola (funciona en terminales compatibles con ANSI)
@@ -239,7 +283,7 @@ public class Interfaz {
 
             // Limpia la consola al final
             System.out.print("\033[H\033[2J");
-            System.out.println("¡Fin de la animación de fuegos artificiales!");
+            System.out.println("¡Enhorabuena "+nombre+" has ganado!");
 
         } catch (InterruptedException e) {
             System.err.println("Error en la animación: " + e.getMessage());
@@ -254,5 +298,10 @@ public class Interfaz {
         int Maxbandas = solicitarNum("Escriba el maximo de bandas para jugar", 1, Integer.MAX_VALUE);
         int cantTableros = solicitarNum("Escriba la cantidad de tableros con la que desea jugar", 1, 3);
         sys.setConfiguraciones(largobandas, contacto, Maxbandas, cantTableros);
+    }
+    
+    public void empezarPartida(Sistema sys){
+        elegirJugador(sys);
+        
     }
 }

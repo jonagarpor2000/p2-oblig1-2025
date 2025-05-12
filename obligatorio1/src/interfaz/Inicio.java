@@ -6,9 +6,6 @@ package interfaz;
 
 import dominio.Jugador;
 import dominio.Sistema;
-import dominio.Tablero;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -22,8 +19,9 @@ public class Inicio {
      */
     public static void main(String[] args) {
         Sistema sys = new Sistema();
-        Interfaz.menu(sys);
-        sys.registrarJugador(new Jugador("Roberto",18));
+        Interfaz interfaz = new Interfaz();
+        interfaz.menu(sys);
+        interfaz.fuegosArtificiales("Generico");
     }
     
 
