@@ -67,7 +67,7 @@ public class Interfaz {
 
     }
 
-    public static Jugador ingresoJugador(Sistema sys) {
+    public Jugador ingresoJugador(Sistema sys) {
         Scanner in = new Scanner(System.in);
         String nombre;
         int edad = Integer.MIN_VALUE;
@@ -82,7 +82,7 @@ public class Interfaz {
         return new Jugador(nombre, edad);
     }
 
-    public static int solicitarNum(String mensaje, int minimo, int maximo) {
+    public int solicitarNum(String mensaje, int minimo, int maximo) {
         Scanner in = new Scanner(System.in);
         boolean ok = false;
         int num = 0;
@@ -104,7 +104,7 @@ public class Interfaz {
         return num;
     }
 
-    public static boolean solicitarBoolean(String mensaje) {    //Revisar si se puede cambiar Scanner por nextBoolean
+    public boolean solicitarBoolean(String mensaje) {    //Revisar si se puede cambiar Scanner por nextBoolean
         Scanner in = new Scanner(System.in);
         boolean ok = false;
         int num = 0;
@@ -128,7 +128,7 @@ public class Interfaz {
         return num==1;
     }
 
-        public static void mostrarTablero(){
+        public void mostrarTablero(){
         try {
             System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
             cargarTablero();
@@ -138,7 +138,7 @@ public class Interfaz {
         
     }
 
-    public static void cargarTablero() {
+    public void cargarTablero() {
         int FILAS = 7;
         int COLUMNAS = 13;
         //private final int COLUMNAS = 13;
@@ -154,14 +154,14 @@ public class Interfaz {
         }
     }
 
-    public static void listadoJugadores(Sistema sys) {
+    public void listadoJugadores(Sistema sys) {
         System.out.println("\nLista de jugadores\n------------");
         for (Jugador gamer : sys.getListaJugadores()) {
             System.out.println(gamer + "\n");
         }
     }
 
-    public static boolean jugadorExistente(String nombre, Sistema sys) {
+    public boolean jugadorExistente(String nombre, Sistema sys) {
         boolean existe = false;
         for (Jugador j : sys.getListaJugadores()) {
             if (j.getNombre().equalsIgnoreCase(nombre)) {
@@ -291,7 +291,7 @@ public class Interfaz {
     }
 
 
-    public static void setearConfigs(Sistema sys) {
+    public void setearConfigs(Sistema sys) {
         System.out.println("Establezca las configuraciones para la partida: ");
         int largobandas = solicitarNum("Escriba el largo de movilidad que tendra con las bandas", 1, 4);
         boolean contacto = solicitarBoolean("Escriba 1 si desea el contacto con las bandas anteriores o escriba 0 si desea que la banda sea colocada en cualquier ubicación");
