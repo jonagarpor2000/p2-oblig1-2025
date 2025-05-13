@@ -19,9 +19,10 @@ public class Inicio {
      */
     public static void main(String[] args) {
         Sistema sys = new Sistema();
-        Interfaz interfaz = new Interfaz();
-        interfaz.menu(sys);
-        interfaz.fuegosArtificiales("Generico");
+        Interfaz interfaz = new Interfaz(sys);
+        
+        //interfaz.mostrarTablero();
+        //interfaz.fuegosArtificiales("Generico");
     }
     
 

@@ -52,25 +52,32 @@ public class Tablero {
     }
 
 private void inicializarTablero() {
-    for (int i = 0; i < filas; i++)
-        for (int j = 0; j < columnas; j++)
-            tablero[i][j] = ' ';
-
-    int centro = columnas / 2; 
-
-    for (int i = 0; i < filas; i++) {
-        int alcance     = i <= filas/2 ? i : filas - 1 - i;
-        int nEstrellas  = filas/2 + 1 + alcance;      
-        int colInicial          = centro - (nEstrellas - 1); 
-
-        for (int k = 0; k < nEstrellas; k++) {
-            int j = colInicial + k * 2;
-            tablero[i][j] = '*';
+    int centro = this.filas/2;
+    boolean mitad = false;
+    int despH = 4;
+    int despV = -2;
+    int acumAsteriscos = 7;
+    
+    for (int i = 0; i <= this.filas; i++) {
+        for (int j = 0; j < this.columnas; j++) {
+            tablero[i][j]=' ';
         }
-        System.out.println("\n");
     }
+    dibujarMitad(acumAsteriscos,despH,despV,0);
+    despV=2;
+    dibujarMitad(acumAsteriscos,despH,despV,this.columnas-1);
+
 }
 
+public void dibujarMitad(int acumAsteriscos, int desplazamientoHorizonal, int desplazamientoVertical,int lim){
+    int centro = this.filas/2;
+    for (int i = centro; i >= 0; i+=desplazamientoVertical) {
+        for (int j = 0; j < this.columnas && (acumAsteriscos > 0); j+=desplazamientoHorizonal) {
+            tablero[i][j]='*';
+        }
+        acumAsteriscos--;
+    }
+}
 
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()

@@ -5,6 +5,7 @@
 package interfaz;
 
 import dominio.Jugador;
+import dominio.Partida;
 import dominio.Sistema;
 import java.util.*;
 import dominio.Tablero;
@@ -17,20 +18,27 @@ import java.nio.charset.StandardCharsets;
  * @author Jonathan Garcia
  */
 
-//nombre + Nroestudiante en interfaz
-public class Interfaz {
-    public Jugador j1 = new Jugador (null,0);
-    public Jugador j2 = new Jugador (null,0);
-    public void menu(Sistema sys) {
 
-        Scanner in = new Scanner(System.in);
+public class Interfaz {
+    private final Sistema sys;
+    private Partida game;
+    private Scanner in; // No olvidar nextLine luego de nextInt, tiene error de buffering
+    
+    
+    public Interfaz(Sistema sys){
+        this.sys = sys;
+        this.in = new Scanner (System.in);
+        menu();
+    }
+    public void menu() {
         int op = 0;
         while (op != 5) {
             System.out.println("--------------------------------------------------------");
             System.out.println("\t Triangulos - Main menu");
-            System.out.println("\t Desarrollado por: "
-                    + "\n \tJonathan Garcia - 307938"
-                    + "\n \tNahuel Paroldo - 64814");
+            System.out.println("""
+                               \t Desarrollado por: 
+                                \tJonathan Garcia - 307938
+                                \tNahuel Paroldo - 345530""");
             System.out.println("--------------------------------------------------------\n");
             System.out.println(" Seleccione su opcion:");
             System.out.println("1 - Registrar jugador\n");
@@ -38,13 +46,13 @@ public class Interfaz {
             System.out.println("3 - Comienzo de la partida\n");
             System.out.println("4 - Ver ranking\n");
             System.out.println("5 - Salir del juego\n");
-            op = solicitarNum("Ingrese opcion (1-5) ", 1, 5);
+            op = solicitarNum("Ingrese opcion ", 1, 5);
             switch (op) {
                 case 1:
-                    sys.registrarJugador(ingresoJugador(sys));
+                    sys.registrarJugador(ingresoJugador());
                     break;
                 case 2:
-                    setearConfigs(sys);
+                    setearConfigs();
                     break;
                 case 3:
                     if (sys.getListaJugadores().size() < 2) {
@@ -70,14 +78,13 @@ public class Interfaz {
 
     }
 
-    public Jugador ingresoJugador(Sistema sys) {
-        Scanner in = new Scanner(System.in);
+    public Jugador ingresoJugador() {
         String nombre;
         int edad = Integer.MIN_VALUE;
         System.out.println("Ingrese los datos solicitados: ");
         System.out.println("Ingrese su nickname: ");
         nombre = in.nextLine();
-        while (jugadorExistente(nombre, sys)) {
+        while (jugadorExistente(nombre)) {
             System.out.println("El jugador " + nombre + " existe \nPruebe con otro nombre");
             nombre = in.nextLine();
         }
@@ -86,15 +93,15 @@ public class Interfaz {
     }
 
     public int solicitarNum(String mensaje, int minimo, int maximo) {
-        Scanner in = new Scanner(System.in);
         boolean ok = false;
         int num = 0;
         while (!ok) {
             try {
-                System.out.println(mensaje);
+                System.out.println(mensaje+" ( "+minimo+" - "+maximo+" )");
                 num = in.nextInt();
+                in.nextLine();
                 if (num < minimo || num > maximo) {
-                    System.out.println("Valor fuera de rango( " + minimo + " - " + maximo + " )");
+                    System.out.println("Valor fuera de rango(" + minimo + "-" + maximo + ")");
                 } else {
                     ok = true;
                 }
@@ -108,26 +115,29 @@ public class Interfaz {
     }
 
     public boolean solicitarBoolean(String mensaje) {    //Revisar si se puede cambiar Scanner por nextBoolean
-        Scanner in = new Scanner(System.in);
         boolean ok = false;
-        int num = 0;
-        while (!ok) {
+        int num = Integer.MIN_VALUE;
+            
+        
+        while(!ok){
             try {
                 System.out.println(mensaje);
                 num = in.nextInt();
-                if (num < 0 || num > 1) {
-                    System.out.println("Valor fuera de rango, debe ser 0 (para indicar false) o 1 (para indicar true)");
-                } else {
-                    ok = true;
+                in.nextLine();
+                if(num < 0 || num > 1){
+                    System.out.println("Debe ingresar 0 o 1");
+                }else{
+                    ok=true;
                 }
                 
-               
+                
 
             } catch (InputMismatchException e) {
-                System.out.println("Por favor, ingrese solo numeros");
-                in.nextLine();
+                System.out.println("Por favor, ingrese solo  0 o 1");
+                num = in.nextInt();
             }
         }
+        
         return num==1;
     }
 
@@ -142,22 +152,21 @@ public class Interfaz {
     }
 
     public void cargarTablero() {
-        int FILAS = 7;
-        int COLUMNAS = 13;
+        int filas = 13;
+        int columnas = 25;
         //private final int COLUMNAS = 13;
-
-        Tablero t = new Tablero(FILAS, COLUMNAS);
         System.out.println("  A B C D E F G H I J K L M");
-        for (int i = 0; i < FILAS; i++) {
-            System.out.print((i + 1) + " ");
-            for (int j = 0; j < COLUMNAS; j++) {
-                System.out.print(t.getTablero()[i][j] + " ");
+        Tablero t = new Tablero(filas, columnas);
+        
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                System.out.print(t.getTablero()[i][j]+" ");
             }
             System.out.println();
         }
     }
 
-    public boolean jugadorExistente(String nombre, Sistema sys) {
+    public boolean jugadorExistente(String nombre) {
         boolean existe = false;
         for (Jugador j : sys.getListaJugadores()) {
             if (j.getNombre().equalsIgnoreCase(nombre)) {
@@ -167,14 +176,13 @@ public class Interfaz {
         return existe;
     }
     
-    public void elegirJugador(Sistema sys){
+    public void elegirJugador(){
         ArrayList <Jugador> res = solicitarEntradaJugador(sys.getListaJugadores(),sys);
         System.out.println("Ahora repita el procedimiento con el segundo jugador");
         res = solicitarEntradaJugador(res,sys); 
     }
     
     public ArrayList <Jugador> solicitarEntradaJugador(ArrayList<Jugador> playerexcluded,Sistema sys){
-        Scanner in = new Scanner(System.in);
         ArrayList <Jugador> res = new ArrayList<>();
         String nombre;
         System.out.println("Elija su jugador de la lista indicando su nombre\n");
@@ -184,19 +192,18 @@ public class Interfaz {
         }
         
         nombre = in.nextLine();
-        if(jugadorExistente(nombre,sys)){
+        if(jugadorExistente(nombre)){
            for (Jugador j : playerexcluded) {
-               if(j.getNombre().contentEquals(nombre) && (j1.getNombre()==null)){
-                  j1 = obtenerJugador(sys,nombre);
-                  
+               if(j.getNombre().contentEquals(nombre) && (game.getJ1()==null)){
+                  game.setJ1(obtenerJugador(nombre));
                }else if (j.getNombre().contentEquals(nombre)){
-                   j2 = obtenerJugador(sys,nombre);
+                  game.setJ2(obtenerJugador(nombre));
                }
                
             }
                 res = sys.ObtenerJugadoresExcluidos(nombre, playerexcluded);
         }else{
-            while(!jugadorExistente(nombre,sys)){
+            while(!jugadorExistente(nombre)){
                 System.out.println("El jugador "+nombre+ "no existe.");
                 System.out.println("Ingrese un nombre valido");
                 nombre = in.nextLine();
@@ -210,7 +217,7 @@ public class Interfaz {
     
     }
     
-    public Jugador obtenerJugador(Sistema sys,String nombre){
+    public Jugador obtenerJugador(String nombre){
         for (Jugador j : sys.getListaJugadores()) {
           if (j.getNombre().equalsIgnoreCase(nombre)) {
               return j;
@@ -292,7 +299,7 @@ public class Interfaz {
     }
 
 
-    public void setearConfigs(Sistema sys) {
+    public void setearConfigs() {
         System.out.println("Establezca las configuraciones para la partida: ");
         int largobandas = solicitarNum("Escriba el largo de movilidad que tendra con las bandas", 1, 4);
         boolean contacto = solicitarBoolean("Escriba 1 si desea el contacto con las bandas anteriores o escriba 0 si desea que la banda sea colocada en cualquier ubicación");
@@ -302,7 +309,7 @@ public class Interfaz {
     }
     
     public void empezarPartida(Sistema sys){
-        elegirJugador(sys);
+        elegirJugador();
         
     }
 }
