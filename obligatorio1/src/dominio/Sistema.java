@@ -17,7 +17,6 @@ public class Sistema {
     
     private final ArrayList <Jugador> listaJugadores;
     private boolean requiereContacto = false;
-    private boolean largoFijo = true;
     private int largoDefault = 4;
     private int maximoBandas = 10;
     private int numTableros = 1;
@@ -30,14 +29,6 @@ public class Sistema {
         this.requiereContacto = requiereContacto;
     }
 
-    public boolean isLargoFijo() {
-        return largoFijo;
-    }
-
-    public void setLargoFijo(boolean largoFijo) {
-        this.largoFijo = largoFijo;
-    }
-
     public int getLargoDefault() {
         return largoDefault;
     }
@@ -45,10 +36,7 @@ public class Sistema {
     public void setLargoDefault(int largoDefault) {
         this.largoDefault = largoDefault;
     }
-
-
-
-
+    
     public int getMaximoBandas() {
         return maximoBandas;
     }
@@ -119,5 +107,7 @@ public class Sistema {
       }
       return null;
     }
+    
+    
 }
 

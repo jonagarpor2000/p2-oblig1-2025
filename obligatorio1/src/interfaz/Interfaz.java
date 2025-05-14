@@ -8,7 +8,6 @@ import dominio.Jugador;
 import dominio.Partida;
 import dominio.Sistema;
 import java.util.*;
-import dominio.Tablero;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
@@ -29,6 +28,8 @@ public class Interfaz {
         this.sys = sys;
         this.in = new Scanner (System.in);
         menu();
+
+
     }
     public void menu() {
         int op = 0;
@@ -142,27 +143,16 @@ public class Interfaz {
         return num==1;
     }
 
-        public void mostrarTablero(){
-        try {
-            System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));
-            cargarTablero();
-        } catch (java.io.UnsupportedEncodingException e) {
-            System.err.println("Encoding no soportado: " + e.getMessage());
-        }
-        
-    }
 
     public void cargarTablero() {
-        int filas = 13;
-        int columnas = 25;
-        //private final int COLUMNAS = 13;
-        System.out.println("  A B C D E F G H I J K L M");
-        Tablero t = new Tablero(filas, columnas);
+        //System.out.println("Largo: "+sys.getLargoDefault()+"Bandas: "+sys.getMaximoBandas()+" Tableros: "+sys.getNumTableros()+" Contacto: "+sys.isRequiereContacto());    
         
-        for (int i = 0; i < filas; i++) {
-            for (int j = 0; j < columnas; j++) {
-                System.out.print(t.getTablero()[i][j]);
+            System.out.println("A B C D E F G H I J K L M");
+           for (int i = 0; i < game.getTablero().getFilas(); i++) {
+            for (int j = 0; j < game.getTablero().getColumnas(); j++) {
+                System.out.print(game.getTablero().getTablero()[i][j]);
             }
+            System.out.println();
         }
     }
 

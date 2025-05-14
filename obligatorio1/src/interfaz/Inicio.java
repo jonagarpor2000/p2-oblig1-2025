@@ -4,8 +4,9 @@
  */
 package interfaz;
 
-import dominio.Jugador;
 import dominio.Sistema;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -18,11 +19,14 @@ public class Inicio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        try {
+            System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8.name()));    
+        } catch (java.io.UnsupportedEncodingException e) {
+            System.err.println("Encoding no soportado: " + e.getMessage());
+        }
         Sistema sys = new Sistema();
         Interfaz interfaz = new Interfaz(sys);
         
-        //interfaz.mostrarTablero();
-        //interfaz.fuegosArtificiales("Generico");
     }
     
 

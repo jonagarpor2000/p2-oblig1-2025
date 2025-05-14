@@ -13,6 +13,16 @@ public class Partida {
     private Jugador j1;
     private Jugador j2;
     private Jugador turno;
+    private Tablero tablero;
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
+    }
+    
 
     public Jugador getJ1() {
         return j1;
@@ -38,5 +48,8 @@ public class Partida {
         this.turno = turno;
     }
     
+    public Partida(){
+        tablero = new Tablero(13,25);
+    }
     
 }

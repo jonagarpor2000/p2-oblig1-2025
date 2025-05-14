@@ -50,29 +50,57 @@ public class Tablero {
     }
 
 private void inicializarTablero() {
-   int despH = 4;
-    int despV = -2;
-    int acumAsteriscos = filas/2;
-    
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < columnas; j++) {
-            tablero[i][j]=' ';
+      int FILAS   = this.getFilas();
+        int COLUMNAS = this.getColumnas();
+        for (int i = 0; i < FILAS; i++) {
+            for (int j = 0; j < COLUMNAS; j++) {
+                this.getTablero()[i][j] = ' ';
+            }
         }
-    }
-    dibujarMitad(acumAsteriscos,despH,despV,0);
-    despV=2;
-    dibujarMitad(acumAsteriscos,despH,despV,columnas-1);
+        int[][] asterisco = {
+                {0,6},
+                {0,10},
+                {0,14},
+                {0,18},
+                {2,4},
+                {2,8},
+                {2,12},
+                {2,16},
+                {2,20},
+                {4,2},
+                {4,6},
+                {4,10},
+                {4,14},
+                {4,18},
+                {4,22},
+                {6,0},
+                {6,4},
+                {6,8},
+                {6,12},
+                {6,16},
+                {6,20},
+                {6,24},
+                {8,2},
+                {8,6},
+                {8,10},
+                {8,14},
+                {8,18},
+                {8,22},
+                {10,4},
+                {10,8},
+                {10,12},
+                {10,16},
+                {10,20},
+                {12,6},
+                {12,10},
+                {12,14},
+                {12,18}
+            };
 
-}
-
-public void dibujarMitad(int acumAsteriscos, int desplazamientoHorizontal, int desplazamientoVertical,int lim){
-     int centro = filas/2;
-    for (int i = centro;  (i > 0)  && (i < filas); i+=desplazamientoVertical) {
-        for (int j = 0; j < columnas && (acumAsteriscos > 0); j+=desplazamientoHorizontal) {
-            tablero[i][j]='*';
-        }
-        if (acumAsteriscos > 0) {
-            acumAsteriscos--;
+        for (int[] pos : asterisco) {
+            int fila = pos[0], col = pos[1];
+            if (fila >= 0 && fila < FILAS && col >= 0 && col < COLUMNAS) {
+                this.getTablero()[fila][col] = '*';
             }
         }
 }
