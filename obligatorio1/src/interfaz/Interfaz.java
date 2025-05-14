@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Interfaz {
     private final Sistema sys;
-    private Partida game;
+    private Partida game = new Partida();
     private Scanner in; // No olvidar nextLine luego de nextInt, tiene error de buffering
     
     
@@ -69,6 +69,7 @@ public class Interfaz {
                 case 5:
                     //fuegosArtificiales();
                     cargarTablero();
+                    
                     break;
                 default:
                     System.out.println("El valor introducido es inválido");
@@ -132,7 +133,7 @@ public class Interfaz {
                 
                 
 
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException e) { //Error: Nunca llega si se ingresa campo equivocado
                 System.out.println("Por favor, ingrese solo  0 o 1");
                 num = in.nextInt();
             }
@@ -160,9 +161,8 @@ public class Interfaz {
         
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                System.out.print(t.getTablero()[i][j]+" ");
+                System.out.print(t.getTablero()[i][j]);
             }
-            System.out.println();
         }
     }
 
@@ -195,9 +195,9 @@ public class Interfaz {
         if(jugadorExistente(nombre)){
            for (Jugador j : playerexcluded) {
                if(j.getNombre().contentEquals(nombre) && (game.getJ1()==null)){
-                  game.setJ1(obtenerJugador(nombre));
+                  game.setJ1(sys.obtenerJugador(nombre));
                }else if (j.getNombre().contentEquals(nombre)){
-                  game.setJ2(obtenerJugador(nombre));
+                  game.setJ2(sys.obtenerJugador(nombre));
                }
                
             }
@@ -217,14 +217,7 @@ public class Interfaz {
     
     }
     
-    public Jugador obtenerJugador(String nombre){
-        for (Jugador j : sys.getListaJugadores()) {
-          if (j.getNombre().equalsIgnoreCase(nombre)) {
-              return j;
-          }
-      }
-      return null;
-    }
+
 
     
     /* Método para mostrar la animación de fuegos artificiales

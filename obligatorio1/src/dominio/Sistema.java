@@ -111,5 +111,13 @@ public class Sistema {
         }
         return res;
     }
+    public Jugador obtenerJugador(String nombre){
+        for (Jugador j : this.getListaJugadores()) {
+          if (j.getNombre().equalsIgnoreCase(nombre)) {
+              return j;
+          }
+      }
+      return null;
+    }
 }
 

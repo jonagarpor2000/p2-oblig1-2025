@@ -9,8 +9,6 @@ package dominio;
  * @author Nahuel Paroldo
  * @author Jonathan Garcia
  */
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 
 public class Tablero {
 
@@ -52,31 +50,31 @@ public class Tablero {
     }
 
 private void inicializarTablero() {
-    int centro = this.filas/2;
-    boolean mitad = false;
-    int despH = 4;
+   int despH = 4;
     int despV = -2;
-    int acumAsteriscos = 7;
+    int acumAsteriscos = filas/2;
     
-    for (int i = 0; i <= this.filas; i++) {
-        for (int j = 0; j < this.columnas; j++) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
             tablero[i][j]=' ';
         }
     }
     dibujarMitad(acumAsteriscos,despH,despV,0);
     despV=2;
-    dibujarMitad(acumAsteriscos,despH,despV,this.columnas-1);
+    dibujarMitad(acumAsteriscos,despH,despV,columnas-1);
 
 }
 
-public void dibujarMitad(int acumAsteriscos, int desplazamientoHorizonal, int desplazamientoVertical,int lim){
-    int centro = this.filas/2;
-    for (int i = centro; i >= 0; i+=desplazamientoVertical) {
-        for (int j = 0; j < this.columnas && (acumAsteriscos > 0); j+=desplazamientoHorizonal) {
+public void dibujarMitad(int acumAsteriscos, int desplazamientoHorizontal, int desplazamientoVertical,int lim){
+     int centro = filas/2;
+    for (int i = centro;  (i > 0)  && (i < filas); i+=desplazamientoVertical) {
+        for (int j = 0; j < columnas && (acumAsteriscos > 0); j+=desplazamientoHorizontal) {
             tablero[i][j]='*';
         }
-        acumAsteriscos--;
-    }
+        if (acumAsteriscos > 0) {
+            acumAsteriscos--;
+            }
+        }
 }
 
     public boolean esCasillaValida(int fila, int columna) {
