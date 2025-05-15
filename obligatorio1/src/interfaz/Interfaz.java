@@ -290,7 +290,7 @@ public class Interfaz {
             }else if (posiciones[1][0]==-1 && posiciones[1][1]==-1 ){
                System.out.println("Jugada fuera de rango, reintente nuevamente");
             }else{
-                game.realizarJugada(posiciones,'-');
+                game.realizarJugada(posiciones,'C');
             }
     }
     
