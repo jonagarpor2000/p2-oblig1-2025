@@ -61,13 +61,21 @@ public class Partida {
         }
     }
 
-    
-    public boolean realizarJugada(int fila, int columna) {
-        if (tablero.esMovimientoValido(fila, columna, turno)) {
-            tablero.realizarMovimiento(fila, columna, turno);
-            return true;
+    /*
+    jugada[0][0] Fila origen
+    jugada[0][1] Columna origen
+    jugada[1][0] fila destino
+    jugada[1][1] columna destino 
+    direccion item a escribir
+    */
+    public boolean realizarJugada(int jugada[][],char direccion) {
+        boolean jugadaCorrecta = false;
+        //colocarBandas(int fila, int columna, int[][] posOrigDest,char tipoBanda) {
+        if (tablero.colocarBandasC(jugada,direccion)) {
+            
+            return jugadaCorrecta = true;
         }
-        return false;
+        return jugadaCorrecta;
     }
 
     

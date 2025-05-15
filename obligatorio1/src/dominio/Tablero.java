@@ -132,15 +132,40 @@ public class Tablero {
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()
                 && columna >= 0 && columna < this.getColumnas()
-                && tablero[fila][columna] == '.';
+                && tablero[fila][columna] == '*';
     }
 
-    public boolean colocarFicha(int fila, int columna, char ficha) {
-        if (esCasillaValida(fila, columna)) {
-            tablero[fila][columna] = ficha;
-            return true;
+    public boolean colocarBandasC(int[][] posOrigDest,char tipoBanda) {
+        boolean bandasColocadas = false;
+        int j = posOrigDest[0][1];
+        if (esCasillaValida(posOrigDest[0][0],posOrigDest[0][1])&& esCasillaValida(posOrigDest[1][0],posOrigDest[1][1])) {
+            for (int i = posOrigDest[0][0]; i < posOrigDest[1][0]; i++) {
+                    if(tablero[i][j]==' '){
+                        tablero[i][j] = tipoBanda;
+                    }
+                j++;
+            }
+            
+            bandasColocadas=true;
+            
         }
-        return false;
+        return bandasColocadas;
+    }
+    public boolean colocarBandasQ(int[][] posOrigDest,char tipoBanda) {
+        boolean bandasColocadas = false;
+        int j = posOrigDest[0][1];
+        if (esCasillaValida(posOrigDest[0][0],posOrigDest[0][1])&& esCasillaValida(posOrigDest[1][0],posOrigDest[1][1])) {
+            for (int i = posOrigDest[0][0]; i < posOrigDest[1][0]; i++) {
+                    if(tablero[i][j]==' '){
+                        tablero[i][j] = tipoBanda;
+                    }
+                j++;
+            }
+            
+            bandasColocadas=true;
+            
+        }
+        return bandasColocadas;
     }
 
     boolean esMovimientoValido(int fila, int columna, Jugador turno) {
