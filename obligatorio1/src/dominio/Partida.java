@@ -52,4 +52,33 @@ public class Partida {
         tablero = new Tablero(13,25);
     }
     
+    // Cambiar el turno al siguiente jugador
+    public void cambiarTurno() {
+        if (turno == j1) {
+            turno = j2;
+        } else {
+            turno = j1;
+        }
+    }
+
+    
+    public boolean realizarJugada(int fila, int columna) {
+        if (tablero.esMovimientoValido(fila, columna, turno)) {
+            tablero.realizarMovimiento(fila, columna, turno);
+            return true;
+        }
+        return false;
+    }
+
+    
+    public Jugador verificarGanador() {
+        return tablero.determinarGanador();
+    }
+
+    
+    public void reiniciarPartida() {
+        tablero = new Tablero(13, 25);
+        turno = j1;
+    }
+    
 }

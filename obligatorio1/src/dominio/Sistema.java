@@ -14,7 +14,6 @@ import java.util.*;
 
 //Configuracion queda aca adentro  y partida tambien
 public class Sistema {
-    
     private final ArrayList <Jugador> listaJugadores;
     private boolean requiereContacto = false;
     private int largoDefault = 4;
@@ -106,6 +105,34 @@ public class Sistema {
           }
       }
       return null;
+    }
+    
+    public int[][] decodificarJugada(Partida game,String input){
+        int[][] jugada = new int[1][1];
+        boolean letraencontrada = false;
+        try{
+            char letra = input.charAt(0);
+            int fila = Integer.parseInt(input.substring(1,2));
+            char direccion = input.charAt(2);
+            int largo=Integer.parseInt(input.substring(1,2));
+            char[] abc = game.getTablero().getAbecedario();
+            
+            for (int i = 0; i < abc.length && !letraencontrada; i++) {
+                if(letra == abc[i]){
+                    jugada[0][0] = i;
+                    letraencontrada=true;
+                }
+            }
+            
+            switch(direccion){
+                case'Q':
+                case 'q':
+            }
+        }catch(NumberFormatException e){
+        
+        }
+        
+        return jugada;
     }
     
     

@@ -14,7 +14,17 @@ public class Tablero {
 
     private int filas;
     private int columnas;
+    private char [] abecedario;
 
+    public char[] getAbecedario() {
+        return abecedario;
+    }
+
+    public void setAbecedario(char[] abecedario) {
+        this.abecedario = abecedario;
+    }
+
+    
     public int getFilas() {
         return filas;
     }
@@ -49,8 +59,18 @@ public class Tablero {
 
     }
 
-private void inicializarTablero() {
-      int FILAS   = this.getFilas();
+    private void inicializarTablero() {
+         char[] abc = new char[this.getFilas()*2];
+         char letra = 'A';
+         for (int i = 0; i < abc.length; i+=2) {
+            abc[i]=letra++;
+            if(i+1 < abc.length){
+                abc[i+1] =' ';
+            }
+            
+        }
+         this.setAbecedario(abc); 
+        int FILAS = this.getFilas();
         int COLUMNAS = this.getColumnas();
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
@@ -103,7 +123,11 @@ private void inicializarTablero() {
                 this.getTablero()[fila][col] = '*';
             }
         }
-}
+    }
+
+    public void reiniciarTablero() {
+        inicializarTablero();
+    }
 
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()
@@ -117,6 +141,19 @@ private void inicializarTablero() {
             return true;
         }
         return false;
+    }
+
+    boolean esMovimientoValido(int fila, int columna, Jugador turno) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    void realizarMovimiento(int fila, int columna, Jugador turno) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    Jugador determinarGanador() {
+       
+        return null;
     }
 
 }

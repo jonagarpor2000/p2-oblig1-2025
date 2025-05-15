@@ -5,6 +5,7 @@
 package dominio;
 
 import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Jugador implements Comparable<Jugador>{
     private String nombre;
     private int edad;
     private int racha;
+    private List<Jugador> listaJugadores;
     
     public Jugador (String nombre,int edad){
         this.nombre = nombre;
@@ -65,6 +67,15 @@ public class Jugador implements Comparable<Jugador>{
     public void anotarVictoria() {
         this.puntaje++;
         this.racha++;
+    }
+    
+    public Jugador buscarJugadorPorNombre(String nombre) {
+        for (Jugador jugador : listaJugadores) {
+            if (jugador.getNombre().equalsIgnoreCase(nombre)) {
+                return jugador;
+            }
+        }
+        return null;
     }
     
     @Override

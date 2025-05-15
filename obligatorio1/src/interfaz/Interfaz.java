@@ -59,7 +59,8 @@ public class Interfaz {
                     if (sys.getListaJugadores().size() < 2) {
                         System.out.println("Se requieren al menos 2 jugadores para comenzar el juego");
                     } else {
-                        empezarPartida(sys);
+                        empezarPartida();
+                        
                     }
                     break;
                 case 4:
@@ -142,12 +143,20 @@ public class Interfaz {
         
         return num==1;
     }
-
+    
+    public boolean confirmarAccion(String mensaje) {
+        System.out.println(mensaje + " (1: Sí, 0: No)");
+        return solicitarNum("", 0, 1) == 1;
+    }
 
     public void cargarTablero() {
         //System.out.println("Largo: "+sys.getLargoDefault()+"Bandas: "+sys.getMaximoBandas()+" Tableros: "+sys.getNumTableros()+" Contacto: "+sys.isRequiereContacto());    
         
-            System.out.println("A B C D E F G H I J K L M");
+            
+        for (char letra : game.getTablero().getAbecedario()) {
+            System.out.print(letra);
+        }
+            System.out.println();
            for (int i = 0; i < game.getTablero().getFilas(); i++) {
             for (int j = 0; j < game.getTablero().getColumnas(); j++) {
                 System.out.print(game.getTablero().getTablero()[i][j]);
@@ -291,7 +300,11 @@ public class Interfaz {
         sys.setConfiguraciones(largobandas, contacto, Maxbandas, cantTableros);
     }
     
-    public void empezarPartida(Sistema sys){
+    public void ingresarJugada(){
+            
+    }
+    
+    public void empezarPartida(){
         elegirJugador();
         
     }
