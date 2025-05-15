@@ -159,7 +159,7 @@ public class Tablero {
                     if(tablero[i][j]==' '){
                         tablero[i][j] = tipoBanda;
                     }
-                j++;
+                j++;-
             }
             
             bandasColocadas=true;
