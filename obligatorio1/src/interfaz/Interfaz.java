@@ -47,6 +47,10 @@ public class Interfaz {
             System.out.println("3 - Comienzo de la partida\n");
             System.out.println("4 - Ver ranking\n");
             System.out.println("5 - Salir del juego\n");
+            Jugador p1 = new Jugador("Carlos",24);
+            Jugador p2 = new Jugador("Carlitos",23);
+            sys.registrarJugador(p1);
+            sys.registrarJugador(p2);
             op = solicitarNum("Ingrese opcion ", 1, 5);
             switch (op) {
                 case 1:
@@ -117,32 +121,6 @@ public class Interfaz {
         return num;
     }
 
-    public boolean solicitarBoolean(String mensaje) {    //Revisar si se puede cambiar Scanner por nextBoolean
-        boolean ok = false;
-        int num = Integer.MIN_VALUE;
-            
-        
-        while(!ok){
-            try {
-                System.out.println(mensaje);
-                num = in.nextInt();
-                in.nextLine();
-                if(num < 0 || num > 1){
-                    System.out.println("Debe ingresar 0 o 1");
-                }else{
-                    ok=true;
-                }
-                
-                
-
-            } catch (InputMismatchException e) { //Error: Nunca llega si se ingresa campo equivocado
-                System.out.println("Por favor, ingrese solo  0 o 1");
-                num = in.nextInt();
-            }
-        }
-        
-        return num==1;
-    }
     
     public boolean confirmarAccion(String mensaje) {
         System.out.println(mensaje + " (1: Sí, 0: No)");
@@ -294,18 +272,31 @@ public class Interfaz {
     public void setearConfigs() {
         System.out.println("Establezca las configuraciones para la partida: ");
         int largobandas = solicitarNum("Escriba el largo de movilidad que tendra con las bandas", 1, 4);
-        boolean contacto = solicitarBoolean("Escriba 1 si desea el contacto con las bandas anteriores o escriba 0 si desea que la banda sea colocada en cualquier ubicación");
+        boolean contacto = confirmarAccion("Escriba si desea el contacto con las bandas anteriores, en otro caso la banda sera colocada en cualquier ubicación");
         int Maxbandas = solicitarNum("Escriba el maximo de bandas para jugar", 1, Integer.MAX_VALUE);
         int cantTableros = solicitarNum("Escriba la cantidad de tableros con la que desea jugar", 1, 3);
         sys.setConfiguraciones(largobandas, contacto, Maxbandas, cantTableros);
     }
     
     public void ingresarJugada(){
+            System.out.println("Ingrese su jugada: ");
+            String jugada = in.nextLine();
+            int posiciones[][] = sys.decodificarJugada(game,jugada);
             
+            
+            if(posiciones[1][0]==0 && posiciones[1][1]==0 ){
+                System.out.println("Jugada con direccion invalida, reintente nuevamente");
+                
+            }else if (posiciones[1][0]==-1 && posiciones[1][1]==-1 ){
+               System.out.println("Jugada fuera de rango, reintente nuevamente");
+            }else{
+                game.realizarJugada(posiciones,'-');
+            }
     }
     
     public void empezarPartida(){
         elegirJugador();
-        
+        ingresarJugada();
+        cargarTablero();
     }
 }

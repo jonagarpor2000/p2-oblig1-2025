@@ -65,9 +65,6 @@ public class Sistema {
         listaJugadores = new ArrayList<>();
     }
     
-    public void comprobarMinJugadores(){
-    
-    }
    
     public void ordenarScoreDec(){
         Collections.sort(listaJugadores, new CriterioScoreDecreciente());
@@ -108,30 +105,57 @@ public class Sistema {
     }
     
     public int[][] decodificarJugada(Partida game,String input){
-        int[][] jugada = new int[1][1];
+        int[][] jugada = new int[2][2];
         boolean letraencontrada = false;
         try{
+            //Posibilidades: Jugada por defecto, fila ingresada es solo de astersicos, validar cada casilla ingresada
             char letra = input.charAt(0);
-            int fila = Integer.parseInt(input.substring(1,2));
+            int fila = Integer.parseInt(input.substring(1,2))-1;
             char direccion = input.charAt(2);
-            int largo=Integer.parseInt(input.substring(1,2));
+            int largo=Integer.parseInt(input.substring(3,4));
             char[] abc = game.getTablero().getAbecedario();
             
             for (int i = 0; i < abc.length && !letraencontrada; i++) {
                 if(letra == abc[i]){
-                    jugada[0][0] = i;
+                    jugada[0][0]= i;
                     letraencontrada=true;
                 }
             }
             
+            jugada[0][1] = fila;
+            
+            int dirH=0;
+            int dirV=0;
             switch(direccion){
-                case'Q':
-                case 'q':
+                case'C':
+                case 'c':
+                        dirH=largo*2;
+                        dirV=largo*2;
+//                    for (int i = 0; i < largo *2; i++) {
+//                        for (int j = 0; j < largo * 2; j++) {
+//                            
+//                        }
+//                        dirH++;
+//                        dirV++;
+//                    }
+                    jugada[1][0] = jugada[0][0]+dirV;
+                   jugada[1][1] = jugada[0][1]+dirH;
+                  break;
+                  
+                default:
+                    jugada[1][0] = 0;
+                    jugada[1][1] = 0;
+                   break;
+                    
+                
             }
         }catch(NumberFormatException e){
-        
+            System.out.println("Error de conversion de parametros");
+            
+        }catch(IndexOutOfBoundsException e){
+            jugada[1][0] = -1;
+            jugada[1][1] = -1;
         }
-        
         return jugada;
     }
     

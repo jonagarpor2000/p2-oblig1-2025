@@ -132,15 +132,26 @@ public class Tablero {
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()
                 && columna >= 0 && columna < this.getColumnas()
-                && tablero[fila][columna] == '.';
+                && tablero[fila][columna] == '*';
     }
 
-    public boolean colocarFicha(int fila, int columna, char ficha) {
-        if (esCasillaValida(fila, columna)) {
-            tablero[fila][columna] = ficha;
-            return true;
+    public boolean colocarBandas(int[][] posOrigDest,char tipoBanda) {
+        boolean bandasColocadas = false;
+        if (esCasillaValida(posOrigDest[1][0],posOrigDest[1][1])) {
+            for (int i = posOrigDest[0][0]; i < posOrigDest[1][0]; i++) {
+            
+                for (int j = posOrigDest[0][1]; j < posOrigDest[1][1]; i++) {
+                    if((i%2!=0) &&(j%2!=0)){
+                        tablero[i][j] = tipoBanda;
+                    }
+                }
+                
+            }
+            
+            bandasColocadas=true;
+            
         }
-        return false;
+        return bandasColocadas;
     }
 
     boolean esMovimientoValido(int fila, int columna, Jugador turno) {
