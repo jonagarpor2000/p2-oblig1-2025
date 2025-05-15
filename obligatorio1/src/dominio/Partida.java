@@ -75,7 +75,7 @@ public class Partida {
             
             return jugadaCorrecta = true;
         }
-        return jugadaCorrecta;
+        return false;
     }
 
     

@@ -132,7 +132,7 @@ public class Tablero {
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()
                 && columna >= 0 && columna < this.getColumnas()
-                && tablero[fila][columna] == '*';
+                && tablero[fila][columna] == '.';
     }
 
     public boolean colocarBandas(int[][] posOrigDest,char tipoBanda) {
