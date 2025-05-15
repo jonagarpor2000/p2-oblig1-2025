@@ -61,6 +61,7 @@ public class Partida {
         }
     }
 
+<<<<<<< HEAD
     /*
     jugada[0][0] Fila origen
     jugada[0][1] Columna origen
@@ -74,8 +75,15 @@ public class Partida {
         if (tablero.colocarBandas(jugada,direccion)) {
             
             return jugadaCorrecta = true;
+=======
+    
+    public boolean realizarJugada(int fila, int columna) {
+        if (tablero.esMovimientoValido(fila, columna, turno)) {
+            tablero.realizarMovimiento(fila, columna, turno);
+            return true;
+>>>>>>> parent of cf491ba (v0.0.16)
         }
-        return jugadaCorrecta;
+        return false;
     }
 
     

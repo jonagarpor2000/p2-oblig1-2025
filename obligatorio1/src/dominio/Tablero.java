@@ -132,9 +132,10 @@ public class Tablero {
     public boolean esCasillaValida(int fila, int columna) {
         return fila >= 0 && fila < this.getFilas()
                 && columna >= 0 && columna < this.getColumnas()
-                && tablero[fila][columna] == '*';
+                && tablero[fila][columna] == '.';
     }
 
+<<<<<<< HEAD
     public boolean colocarBandas(int[][] posOrigDest,char tipoBanda) {
         boolean bandasColocadas = false;
         if (esCasillaValida(posOrigDest[1][0],posOrigDest[1][1])) {
@@ -152,6 +153,14 @@ public class Tablero {
             
         }
         return bandasColocadas;
+=======
+    public boolean colocarFicha(int fila, int columna, char ficha) {
+        if (esCasillaValida(fila, columna)) {
+            tablero[fila][columna] = ficha;
+            return true;
+        }
+        return false;
+>>>>>>> parent of cf491ba (v0.0.16)
     }
 
     boolean esMovimientoValido(int fila, int columna, Jugador turno) {

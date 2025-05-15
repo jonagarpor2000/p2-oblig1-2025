@@ -3,12 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/nahue/OneDrive/Documentos/GitHub/p2-oblig1-2025/obligatorio1/src/dominio/Sistema.java</file>
             <file>file:/C:/Users/nahue/OneDrive/Documentos/GitHub/p2-oblig1-2025/obligatorio1/src/dominio/Partida.java</file>
             <file>file:/C:/Users/nahue/OneDrive/Documentos/GitHub/p2-oblig1-2025/obligatorio1/src/interfaz/Interfaz.java</file>
             <file>file:/C:/Users/nahue/OneDrive/Documentos/GitHub/p2-oblig1-2025/obligatorio1/src/dominio/Tablero.java</file>
             <file>file:/C:/Users/nahue/OneDrive/Documentos/GitHub/p2-oblig1-2025/obligatorio1/src/interfaz/Inicio.java</file>
             <file>file:/C:/Users/nahue/OneDrive/Documentos/GitHub/p2-oblig1-2025/obligatorio1/src/dominio/Jugador.java</file>
+=======
+            <file>file:/C:/Users/Jona/OneDrive%20-%20Facultad%20de%20Ingenieria%20-%20Universidad%20ORT%20Uruguay/Pictures/ORT/Programacion%202/p2-oblig1-2025/obligatorio1/src/dominio/Partida.java</file>
+            <file>file:/C:/Users/Jona/OneDrive%20-%20Facultad%20de%20Ingenieria%20-%20Universidad%20ORT%20Uruguay/Pictures/ORT/Programacion%202/p2-oblig1-2025/obligatorio1/src/dominio/Jugador.java</file>
+            <file>file:/C:/Users/Jona/OneDrive%20-%20Facultad%20de%20Ingenieria%20-%20Universidad%20ORT%20Uruguay/Pictures/ORT/Programacion%202/p2-oblig1-2025/obligatorio1/src/dominio/Sistema.java</file>
+            <file>file:/C:/Users/Jona/OneDrive%20-%20Facultad%20de%20Ingenieria%20-%20Universidad%20ORT%20Uruguay/Pictures/ORT/Programacion%202/p2-oblig1-2025/obligatorio1/src/interfaz/Inicio.java</file>
+            <file>file:/C:/Users/Jona/OneDrive%20-%20Facultad%20de%20Ingenieria%20-%20Universidad%20ORT%20Uruguay/Pictures/ORT/Programacion%202/p2-oblig1-2025/obligatorio1/src/interfaz/Interfaz.java</file>
+>>>>>>> parent of cf491ba (v0.0.16)
         </group>
     </open-files>
 </project-private>

@@ -65,6 +65,9 @@ public class Sistema {
         listaJugadores = new ArrayList<>();
     }
     
+    public void comprobarMinJugadores(){
+    
+    }
    
     public void ordenarScoreDec(){
         Collections.sort(listaJugadores, new CriterioScoreDecreciente());
@@ -105,23 +108,27 @@ public class Sistema {
     }
     
     public int[][] decodificarJugada(Partida game,String input){
-        int[][] jugada = new int[2][2];
+        int[][] jugada = new int[1][1];
         boolean letraencontrada = false;
         try{
-            //Posibilidades: Jugada por defecto, fila ingresada es solo de astersicos, validar cada casilla ingresada
             char letra = input.charAt(0);
-            int fila = Integer.parseInt(input.substring(1,2))-1;
+            int fila = Integer.parseInt(input.substring(1,2));
             char direccion = input.charAt(2);
-            int largo=Integer.parseInt(input.substring(3,4));
+            int largo=Integer.parseInt(input.substring(1,2));
             char[] abc = game.getTablero().getAbecedario();
             
             for (int i = 0; i < abc.length && !letraencontrada; i++) {
                 if(letra == abc[i]){
+<<<<<<< HEAD
                     jugada[0][0]= i;
+=======
+                    jugada[0][0] = i;
+>>>>>>> parent of cf491ba (v0.0.16)
                     letraencontrada=true;
                 }
             }
             
+<<<<<<< HEAD
             jugada[0][1] = fila;
             
             int dirH=0;
@@ -148,14 +155,16 @@ public class Sistema {
                    break;
                     
                 
+=======
+            switch(direccion){
+                case'Q':
+                case 'q':
+>>>>>>> parent of cf491ba (v0.0.16)
             }
         }catch(NumberFormatException e){
-            System.out.println("Error de conversion de parametros");
-            
-        }catch(IndexOutOfBoundsException e){
-            jugada[1][0] = -1;
-            jugada[1][1] = -1;
+        
         }
+        
         return jugada;
     }
     
