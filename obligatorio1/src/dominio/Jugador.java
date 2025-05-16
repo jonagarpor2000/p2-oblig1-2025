@@ -88,13 +88,22 @@ public class Jugador implements Comparable<Jugador>{
         return String.format("%s (edad: %d) - Ganadas: %d, Racha: %d", nombre, edad, puntaje, racha);
     }
     
-    @Override
-    public boolean equals(Object obj){
-        Jugador player = (Jugador)obj;
-        return this.getNombre()== player.getNombre();
-    }
-    
+@Override
+public boolean equals(Object obj){
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Jugador player = (Jugador) obj;
+    return this.getNombre().equals(player.getNombre());
+}
 
+public static class CriterioAlfabetico implements Comparator <Jugador>{
+
+    @Override
+    public int compare(Jugador p1, Jugador p2){
+        return p1.getNombre().compareTo(p2.getNombre()); 
+    }
+
+}
 
     
     

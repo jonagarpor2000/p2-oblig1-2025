@@ -63,6 +63,7 @@ public class Interfaz {
                     if (sys.getListaJugadores().size() < 2) {
                         System.out.println("Se requieren al menos 2 jugadores para comenzar el juego");
                     } else {
+                        sys.ordenarJugadorAlfabeticamente();
                         empezarPartida();
                         
                     }

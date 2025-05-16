@@ -67,6 +67,10 @@ public class Sistema {
     public void ordenarScoreDec() {
         Collections.sort(listaJugadores, new CriterioScoreDecreciente());
     }
+    
+    public void ordenarJugadorAlfabeticamente() {
+        Collections.sort(listaJugadores, new Jugador.CriterioAlfabetico());
+    }
 
     private class CriterioScoreDecreciente implements Comparator<Jugador> {
 

@@ -14,7 +14,26 @@ public class Partida {
     private Jugador j2;
     private Jugador turno;
     private Tablero tablero;
+    private int puntosBlanco = 0;
+    private int puntosNegro = 0;
 
+    public int getPuntosBlanco() {
+        return puntosBlanco;
+    }
+
+    public void setPuntosBlanco(int puntosBlanco) {
+        this.puntosBlanco = puntosBlanco;
+    }
+
+    public int getPuntosNegro() {
+        return puntosNegro;
+    }
+
+    public void setPuntosNegro(int puntosNegro) {
+        this.puntosNegro = puntosNegro;
+    }
+
+    
     public Tablero getTablero() {
         return tablero;
     }
@@ -81,9 +100,20 @@ public class Partida {
 
     
     public Jugador verificarGanador() {
-        return tablero.determinarGanador();
+            Jugador winner = null;
+            if (this.getPuntosBlanco()>this.getPuntosNegro()){
+                winner=this.getJ1();
+            }else if (this.getPuntosBlanco()>this.getPuntosNegro()){
+                winner=this.getJ1();
+            }
+            this.reiniciarPuntosPartida();
+        return winner;
     }
 
+    public void reiniciarPuntosPartida(){
+        this.setPuntosNegro(0);
+        this.setPuntosBlanco(0);
+    }
     
     public void reiniciarPartida() {
         tablero = new Tablero(13, 25);
