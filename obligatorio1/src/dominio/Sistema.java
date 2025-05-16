@@ -139,6 +139,32 @@ public class Sistema {
                     jugada[1][0] = jugada[0][0] + dirV;
                     jugada[1][1] = jugada[0][1] + dirH;
                     break;
+                case 'E':
+                case 'e':
+                    dirH = +largo * 2;
+                    dirV = -largo * 2;
+                    jugada[1][0] = jugada[0][0] + dirV;
+                    jugada[1][1] = jugada[0][1] + dirH;
+                    break;
+                case 'Z':
+                case 'z':
+                    dirH = -largo * 2;
+                    dirV = +largo * 2;
+                    jugada[1][0] = jugada[0][0] + dirV;
+                    jugada[1][1] = jugada[0][1] + dirH;
+                    break;
+                case 'D':
+                case 'd':
+                    dirH = +largo * 4;
+                    jugada[1][0] = jugada[0][0];
+                    jugada[1][1] = jugada[0][1] + dirH;
+                    break;
+                case 'A':
+                case 'a':
+                    dirH = -largo * 4;
+                    jugada[1][0] = jugada[0][0];
+                    jugada[1][1] = jugada[0][1] + dirH;
+                    break;
                 default:
                     jugada[1][0] = 0;
                     jugada[1][1] = 0;
@@ -146,7 +172,7 @@ public class Sistema {
 
             }
             game.getTablero().registrarJugada(input);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Error de conversion de parametros");
 
         } catch (IndexOutOfBoundsException e) {

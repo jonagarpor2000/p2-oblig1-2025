@@ -16,7 +16,7 @@ public class Tablero {
 
     private int filas;
     private int columnas;
-    private char [] abecedario;
+    private char[] abecedario;
     private List<String> historialJugadas;
 
     public List<String> getHistorialJugadas() {
@@ -26,8 +26,6 @@ public class Tablero {
     public void registrarJugada(String jugada) {
         historialJugadas.add(jugada);
     }
-    
-    
 
     public char[] getAbecedario() {
         return abecedario;
@@ -182,6 +180,80 @@ public class Tablero {
             bandasColocadas = true;
         }
         return bandasColocadas;
+    }
+
+    public boolean colocarBandasE(int[][] posOrigDest, char tipoBanda) {
+        int filaO = posOrigDest[0][0];
+        int colO = posOrigDest[0][1];
+        int filaD = posOrigDest[1][0];
+        int colD = posOrigDest[1][1];
+        boolean bandasColocadas = false;
+
+        if (esCasillaValida(filaO, colO) && esCasillaValida(filaD, colD)) {
+            for (int i = filaO, j = colO; i > filaD && j < colD; i--, j++) {
+                if (tablero[i][j] == ' ') {
+                    tablero[i][j] = tipoBanda;
+                }
+            }
+            bandasColocadas = true;
+        }
+        return bandasColocadas;
+    }
+
+    public boolean colocarBandasZ(int[][] posOrigDest, char tipoBanda) {
+        int filaO = posOrigDest[0][0], colO = posOrigDest[0][1];
+        int filaD = posOrigDest[1][0], colD = posOrigDest[1][1];
+        boolean bandasColocadas = false;
+
+        if (esCasillaValida(filaO, colO) && esCasillaValida(filaD, colD)) {
+            for (int i = filaO, j = colO; i < filaD && j > colD; i++, j--) {
+                if (tablero[i][j] == ' ') {
+                    tablero[i][j] = tipoBanda;
+                }
+            }
+            bandasColocadas = true;
+        }
+        return bandasColocadas;
+    }
+
+    public boolean colocarBandasD(int[][] posOrigDest, char tipoBanda) {
+        int filaO = posOrigDest[0][0];
+        int colO = posOrigDest[0][1];
+        int filaD = posOrigDest[1][0];
+        int colD = posOrigDest[1][1];
+        boolean bandasColocadas = false;
+
+        if (filaO >= 0 && filaO < filas
+                && colO >= 0 && colO < columnas
+                && filaD >= 0 && filaD < filas
+                && colD >= 0 && colD < columnas) {
+            for (int j = colO; j < colD; j++) {
+                if (tablero[filaO][j] == ' ') {
+                    tablero[filaO][j] = tipoBanda;
+                }
+            }
+            bandasColocadas = true;
+        }
+        return bandasColocadas;
+    }
+
+    public boolean colocarBandasA(int[][] posOrigDest, char tipoBanda) {
+        int filaO = posOrigDest[0][0];
+        int colO = posOrigDest[0][1];
+        int filaD = posOrigDest[1][0];
+        int colD = posOrigDest[1][1];
+        if (filaO < 0 || filaO >= filas
+                || colO < 0 || colO >= columnas
+                || filaD < 0 || filaD >= filas
+                || colD < 0 || colD >= columnas) {
+            return false;
+        }
+        for (int j = colO; j > colD; j--) {
+            if (tablero[filaO][j] == ' ') {
+                tablero[filaO][j] = tipoBanda;
+            }
+        }
+        return true;
     }
 
     boolean esMovimientoValido(int fila, int columna, Jugador turno) {
