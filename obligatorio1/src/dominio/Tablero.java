@@ -88,50 +88,10 @@ public class Tablero {
                 this.getTablero()[i][j] = ' ';
             }
         }
-        int[][] asterisco = {
-            {0, 6},
-            {0, 10},
-            {0, 14},
-            {0, 18},
-            {2, 4},
-            {2, 8},
-            {2, 12},
-            {2, 16},
-            {2, 20},
-            {4, 2},
-            {4, 6},
-            {4, 10},
-            {4, 14},
-            {4, 18},
-            {4, 22},
-            {6, 0},
-            {6, 4},
-            {6, 8},
-            {6, 12},
-            {6, 16},
-            {6, 20},
-            {6, 24},
-            {8, 2},
-            {8, 6},
-            {8, 10},
-            {8, 14},
-            {8, 18},
-            {8, 22},
-            {10, 4},
-            {10, 8},
-            {10, 12},
-            {10, 16},
-            {10, 20},
-            {12, 6},
-            {12, 10},
-            {12, 14},
-            {12, 18}
-        };
-
-        for (int[] pos : asterisco) {
-            int fila = pos[0], col = pos[1];
-            if (fila >= 0 && fila < FILAS && col >= 0 && col < COLUMNAS) {
-                this.getTablero()[fila][col] = '*';
+        for (int i = 0; i < FILAS; i += 2) { 
+            int empieza = Math.abs(6 - i); 
+            for (int j = empieza; j < COLUMNAS-empieza; j += 4) {
+                this.getTablero()[i][j] = '*';
             }
         }
     }
