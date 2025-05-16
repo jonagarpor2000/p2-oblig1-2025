@@ -216,17 +216,5 @@ public class Tablero {
         return true;
     }
 
-    boolean esMovimientoValido(int fila, int columna, Jugador turno) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    void realizarMovimiento(int fila, int columna, Jugador turno) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    Jugador determinarGanador() {
-        
-        return null;
-    }
 
 }

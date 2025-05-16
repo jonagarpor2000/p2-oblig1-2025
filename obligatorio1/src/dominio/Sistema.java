@@ -177,7 +177,8 @@ public class Sistema {
             }
             game.getTablero().registrarJugada(input);
         } catch (NumberFormatException e) {
-            System.out.println("Error de conversion de parametros");
+            jugada[1][0] = 0;
+            jugada[1][1] = 0;
 
         } catch (IndexOutOfBoundsException e) {
             jugada[1][0] = -1;
