@@ -9,12 +9,11 @@ package dominio;
  * @author Nahuel Paroldo
  * @author Jonathan Garcia
  */
-
 public class Tablero {
 
     private int filas;
     private int columnas;
-    private char [] abecedario;
+    private char[] abecedario;
 
     public char[] getAbecedario() {
         return abecedario;
@@ -24,7 +23,6 @@ public class Tablero {
         this.abecedario = abecedario;
     }
 
-    
     public int getFilas() {
         return filas;
     }
@@ -60,16 +58,16 @@ public class Tablero {
     }
 
     private void inicializarTablero() {
-         char[] abc = new char[this.getFilas()*2];
-         char letra = 'A';
-         for (int i = 0; i < abc.length; i+=2) {
-            abc[i]=letra++;
-            if(i+1 < abc.length){
-                abc[i+1] =' ';
+        char[] abc = new char[this.getFilas() * 2];
+        char letra = 'A';
+        for (int i = 0; i < abc.length; i += 2) {
+            abc[i] = letra++;
+            if (i + 1 < abc.length) {
+                abc[i + 1] = ' ';
             }
-            
+
         }
-         this.setAbecedario(abc); 
+        this.setAbecedario(abc);
         int FILAS = this.getFilas();
         int COLUMNAS = this.getColumnas();
         for (int i = 0; i < FILAS; i++) {
@@ -78,44 +76,44 @@ public class Tablero {
             }
         }
         int[][] asterisco = {
-                {0,6},
-                {0,10},
-                {0,14},
-                {0,18},
-                {2,4},
-                {2,8},
-                {2,12},
-                {2,16},
-                {2,20},
-                {4,2},
-                {4,6},
-                {4,10},
-                {4,14},
-                {4,18},
-                {4,22},
-                {6,0},
-                {6,4},
-                {6,8},
-                {6,12},
-                {6,16},
-                {6,20},
-                {6,24},
-                {8,2},
-                {8,6},
-                {8,10},
-                {8,14},
-                {8,18},
-                {8,22},
-                {10,4},
-                {10,8},
-                {10,12},
-                {10,16},
-                {10,20},
-                {12,6},
-                {12,10},
-                {12,14},
-                {12,18}
-            };
+            {0, 6},
+            {0, 10},
+            {0, 14},
+            {0, 18},
+            {2, 4},
+            {2, 8},
+            {2, 12},
+            {2, 16},
+            {2, 20},
+            {4, 2},
+            {4, 6},
+            {4, 10},
+            {4, 14},
+            {4, 18},
+            {4, 22},
+            {6, 0},
+            {6, 4},
+            {6, 8},
+            {6, 12},
+            {6, 16},
+            {6, 20},
+            {6, 24},
+            {8, 2},
+            {8, 6},
+            {8, 10},
+            {8, 14},
+            {8, 18},
+            {8, 22},
+            {10, 4},
+            {10, 8},
+            {10, 12},
+            {10, 16},
+            {10, 20},
+            {12, 6},
+            {12, 10},
+            {12, 14},
+            {12, 18}
+        };
 
         for (int[] pos : asterisco) {
             int fila = pos[0], col = pos[1];
@@ -135,35 +133,38 @@ public class Tablero {
                 && tablero[fila][columna] == '*';
     }
 
-    public boolean colocarBandasC(int[][] posOrigDest,char tipoBanda) {
+    public boolean colocarBandasC(int[][] posOrigDest, char tipoBanda) {
         boolean bandasColocadas = false;
         int j = posOrigDest[0][1];
-        if (esCasillaValida(posOrigDest[0][0],posOrigDest[0][1])&& esCasillaValida(posOrigDest[1][0],posOrigDest[1][1])) {
+        if (esCasillaValida(posOrigDest[0][0], posOrigDest[0][1]) && esCasillaValida(posOrigDest[1][0], posOrigDest[1][1])) {
             for (int i = posOrigDest[0][0]; i < posOrigDest[1][0]; i++) {
-                    if(tablero[i][j]==' '){
-                        tablero[i][j] = tipoBanda;
-                    }
-                j++;//Nuevo comentario
+                if (tablero[i][j] == ' ') {
+                    tablero[i][j] = tipoBanda;
+                }
+                j++;
             }
-            
-            bandasColocadas=true;
-            
+
+            bandasColocadas = true;
+
         }
         return bandasColocadas;
     }
-    public boolean colocarBandasQ(int[][] posOrigDest,char tipoBanda) {
+
+    public boolean colocarBandasQ(int[][] posOrigDest, char tipoBanda) {
+        int filaO = posOrigDest[0][0];
+        int colO = posOrigDest[0][1];
+        int filaD = posOrigDest[1][0];
+        int colD = posOrigDest[1][1];
         boolean bandasColocadas = false;
-        int j = posOrigDest[0][1];
-        if (esCasillaValida(posOrigDest[0][0],posOrigDest[0][1])&& esCasillaValida(posOrigDest[1][0],posOrigDest[1][1])) {
-            for (int i = posOrigDest[0][0]; i < posOrigDest[1][0]; i++) {
-                    if(tablero[i][j]==' '){
-                        tablero[i][j] = tipoBanda;
-                    }
-                j++;
+
+        if (esCasillaValida(filaO, colO) && esCasillaValida(filaD, colD)) {
+
+            for (int i = filaO, j = colO; i > filaD && j > colD; i--, j--) {
+                if (tablero[i][j] == ' ') {
+                    tablero[i][j] = tipoBanda;
+                }
             }
-            
-            bandasColocadas=true;
-            
+            bandasColocadas = true;
         }
         return bandasColocadas;
     }
@@ -177,7 +178,7 @@ public class Tablero {
     }
 
     Jugador determinarGanador() {
-       
+
         return null;
     }
 
