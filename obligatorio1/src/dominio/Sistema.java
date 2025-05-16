@@ -142,6 +142,7 @@ public class Sistema {
                     
                 
             }
+            game.getTablero().registrarJugada(input);
         }catch(NumberFormatException e){
             System.out.println("Error de conversion de parametros");
             

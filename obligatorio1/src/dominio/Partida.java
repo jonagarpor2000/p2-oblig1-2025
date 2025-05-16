@@ -68,6 +68,7 @@ public class Partida {
     jugada[1][1] columna destino 
     direccion item a escribir
     */
+    //Lo mejor es recibir el string original
     public boolean realizarJugada(int jugada[][],char direccion) {
         boolean jugadaCorrecta = false;
         //colocarBandas(int fila, int columna, int[][] posOrigDest,char tipoBanda) {
@@ -89,4 +90,8 @@ public class Partida {
         turno = j1;
     }
     
+    /*
+            //Al finalizar turno, se registra la jugada en el historial
+            desde clase sistema
+    */
 }

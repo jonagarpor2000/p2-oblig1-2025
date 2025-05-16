@@ -298,5 +298,6 @@ public class Interfaz {
         elegirJugador();
         ingresarJugada();
         cargarTablero();
+        System.out.println("Esto es el historial:"+game.getTablero().getHistorialJugadas());
     }
 }

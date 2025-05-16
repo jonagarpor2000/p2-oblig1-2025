@@ -4,6 +4,9 @@
  */
 package dominio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Nahuel Paroldo
@@ -15,6 +18,17 @@ public class Tablero {
     private int filas;
     private int columnas;
     private char [] abecedario;
+    private List<String> historialJugadas;
+
+    public List<String> getHistorialJugadas() {
+        return historialJugadas;
+    }
+
+    public void registrarJugada(String jugada) {
+        historialJugadas.add(jugada);
+    }
+    
+    
 
     public char[] getAbecedario() {
         return abecedario;
@@ -60,6 +74,7 @@ public class Tablero {
     }
 
     private void inicializarTablero() {
+        historialJugadas = new ArrayList<>();
          char[] abc = new char[this.getFilas()*2];
          char letra = 'A';
          for (int i = 0; i < abc.length; i+=2) {
