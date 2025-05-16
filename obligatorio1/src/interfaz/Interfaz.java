@@ -129,9 +129,11 @@ public class Interfaz {
     }
 
     public void cargarTablero() {
-        //System.out.println("Largo: "+sys.getLargoDefault()+"Bandas: "+sys.getMaximoBandas()+" Tableros: "+sys.getNumTableros()+" Contacto: "+sys.isRequiereContacto());    
-        
-            
+        System.out.println("Jugador Blanco ("+(game.getJ1().getNombre())+"): "+game.getPuntosBlanco()+" ptos");
+        System.out.println("Jugador Negro ("+(game.getJ2().getNombre())+"): "+game.getPuntosNegro()+" ptos");
+        game.cambiarTurno();
+        String tipo = game.getJ1()==game.getTurno() ? "Blanco" : "Negro";
+        System.out.println("Juega "+game.getTurno().getNombre()+" ("+tipo+")");
         for (char letra : game.getTablero().getAbecedario()) {
             System.out.print(letra);
         }
@@ -282,23 +284,36 @@ public class Interfaz {
     public void ingresarJugada(){
             System.out.println("Ingrese su jugada: ");
             String jugada = in.nextLine();
+            char direccion = jugada.charAt(2);
+            switch (direccion) {
+                case 'Q': case 'C': direccion = '\\'; break;
+                case 'E': case 'Z': direccion = '/'; break;
+                case 'D': case 'A': direccion = '-'; break;
+                default: direccion = ' ';
+            }   
             int posiciones[][] = sys.decodificarJugada(game,jugada);
-            
-            
-            if(posiciones[1][0]==0 && posiciones[1][1]==0 ){
-                System.out.println("Jugada con direccion invalida, reintente nuevamente");
-                
+            if(posiciones[1][0]==0 && posiciones[1][1]==0 && direccion == ' '){
+                System.out.println("Jugada invalida, reintente nuevamente");
+                ingresarJugada();
             }else if (posiciones[1][0]==-1 && posiciones[1][1]==-1 ){
                System.out.println("Jugada fuera de rango, reintente nuevamente");
+               ingresarJugada();
             }else{
-                game.realizarJugada(posiciones,'-');
+                game.realizarJugada(posiciones,direccion);
+                sys.setMaximoBandas(sys.getMaximoBandas()-1);
             }
     }
     
+    
     public void empezarPartida(){
         elegirJugador();
-        ingresarJugada();
-        cargarTablero();
+        while(sys.getMaximoBandas()!=0){
+            cargarTablero();
+            ingresarJugada();
+            game.cambiarTurno();
+        }
+        
+        
         System.out.println("Esto es el historial:"+game.getTablero().getHistorialJugadas());
     }
 }

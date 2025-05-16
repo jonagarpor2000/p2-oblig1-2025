@@ -98,7 +98,9 @@ public class Partida {
         return jugadaCorrecta;
     }
 
-    
+    /*
+    Funcion que verifica jugador con más puntos al finalizar la partida
+    */
     public Jugador verificarGanador() {
             Jugador winner = null;
             if (this.getPuntosBlanco()>this.getPuntosNegro()){
@@ -124,4 +126,13 @@ public class Partida {
             //Al finalizar turno, se registra la jugada en el historial
             desde clase sistema
     */
+    
+//    public class Player extends Jugador{
+//        private String tipoJugador;
+//        public Player(String nombre, int edad) {
+//            super(nombre, edad);
+//          Es una posibilidad ya que el puntaje estará asociado a un jugador  
+//        }
+//    
+//    }
 }
