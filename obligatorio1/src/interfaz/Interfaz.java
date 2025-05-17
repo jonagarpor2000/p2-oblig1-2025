@@ -22,6 +22,7 @@ public class Interfaz {
     private final Sistema sys;
     private Partida game = new Partida();
     private Scanner in; // No olvidar nextLine luego de nextInt, tiene error de buffering
+    private boolean abandono = false;
     
     
     public Interfaz(Sistema sys){
@@ -265,6 +266,7 @@ public class Interfaz {
             // Limpia la consola al final
             System.out.print("\033[H\033[2J");
             System.out.println("¡Enhorabuena "+nombre+" has ganado!");
+            Thread.sleep(1000);
 
         } catch (InterruptedException e) {
             System.err.println("Error en la animación: " + e.getMessage());
@@ -284,36 +286,54 @@ public class Interfaz {
     public void ingresarJugada(){
             System.out.println("Ingrese su jugada: ");
             String jugada = in.nextLine();
-            char direccion = jugada.charAt(2);
-            switch (direccion) {
-                case 'Q': case 'C': direccion = '\\'; break;
-                case 'E': case 'Z': direccion = '/'; break;
-                case 'D': case 'A': direccion = '-'; break;
-                default: direccion = ' ';
-            }   
-            int posiciones[][] = sys.decodificarJugada(game,jugada);
-            if(posiciones[1][0]==0 && posiciones[1][1]==0 && direccion == ' '){
-                System.out.println("Jugada invalida, reintente nuevamente");
-                ingresarJugada();
-            }else if (posiciones[1][0]==-1 && posiciones[1][1]==-1 ){
-               System.out.println("Jugada fuera de rango, reintente nuevamente");
-               ingresarJugada();
+            if(jugada.length()==1){
+                if(jugada.equalsIgnoreCase("x")){
+                    abandono = true;
+                }else if(jugada.equalsIgnoreCase("h")){
+                    System.out.println("El historial de jugadas es: "+game.getTablero().getHistorialJugadas());
+                }
             }else{
-                game.realizarJugada(posiciones,direccion);
-                sys.setMaximoBandas(sys.getMaximoBandas()-1);
+                char direccion = jugada.charAt(2);
+                switch (direccion) {
+                    case 'Q': case 'C': direccion = '\\'; break;
+                    case 'E': case 'Z': direccion = '/'; break;
+                    case 'D': case 'A': direccion = '-'; break;
+                    default: direccion = ' ';
+                }
+
+
+                int posiciones[][] = sys.decodificarJugada(game,jugada);
+                if(posiciones[1][0]==0 && posiciones[1][1]==0 && direccion == ' '){
+                    System.out.println("Jugada invalida, reintente nuevamente");
+                    ingresarJugada();
+                }else if (posiciones[1][0]==-1 && posiciones[1][1]==-1 ){
+                   System.out.println("Jugada fuera de rango, reintente nuevamente");
+                   ingresarJugada();
+                }else{
+                    game.realizarJugada(posiciones,direccion);
+                    sys.setMaximoBandas(sys.getMaximoBandas()-1);
+                }
             }
+            
     }
+    
     
     
     public void empezarPartida(){
         elegirJugador();
-        while(sys.getMaximoBandas()!=0){
+        while(sys.getMaximoBandas()> 0 &&!abandono){
             cargarTablero();
+            System.out.println("Presione X si desea abandonar la partida (gana su adversario) o H si desea ver el historial de jugadas realizadas");
             ingresarJugada();
             game.cambiarTurno();
+            
         }
-        
-        
-        System.out.println("Esto es el historial:"+game.getTablero().getHistorialJugadas());
+        Jugador ganador;
+        if(abandono){
+            ganador = game.verificarGanador(true);
+        }else{
+            ganador = game.verificarGanador(false);
+        }
+        this.fuegosArtificiales(ganador.getNombre());
     }
 }

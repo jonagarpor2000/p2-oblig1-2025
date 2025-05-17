@@ -101,13 +101,22 @@ public class Partida {
     /*
     Funcion que verifica jugador con más puntos al finalizar la partida
     */
-    public Jugador verificarGanador() {
+    public Jugador verificarGanador(boolean abandono) {
             Jugador winner = null;
-            if (this.getPuntosBlanco()>this.getPuntosNegro()){
-                winner=this.getJ1();
-            }else if (this.getPuntosBlanco()>this.getPuntosNegro()){
-                winner=this.getJ1();
+            if(abandono){
+                if(this.getTurno()==this.getJ1()){
+                    winner = this.getJ2();
+                }else{
+                    winner = this.getJ1();
+                }
+            }else{
+                if (this.getPuntosBlanco()>this.getPuntosNegro()){
+                    winner=this.getJ1();
+                }else if (this.getPuntosBlanco()>this.getPuntosNegro()){
+                    winner=this.getJ1();
+                }
             }
+            
             this.reiniciarPuntosPartida();
         return winner;
     }
