@@ -48,10 +48,6 @@ public class Interfaz {
             System.out.println("3 - Comienzo de la partida\n");
             System.out.println("4 - Ver ranking\n");
             System.out.println("5 - Salir del juego\n");
-            Jugador p1 = new Jugador("Carlos",24);
-            Jugador p2 = new Jugador("Carlitos",23);
-            sys.registrarJugador(p1);
-            sys.registrarJugador(p2);
             op = solicitarNum("Ingrese opcion ", 1, 5);
             switch (op) {
                 case 1:
@@ -132,7 +128,6 @@ public class Interfaz {
     public void cargarTablero() {
         System.out.println("Jugador Blanco ("+(game.getJ1().getNombre())+"): "+game.getPuntosBlanco()+" ptos");
         System.out.println("Jugador Negro ("+(game.getJ2().getNombre())+"): "+game.getPuntosNegro()+" ptos");
-        game.cambiarTurno();
         String tipo = game.getJ1()==game.getTurno() ? "Blanco" : "Negro";
         System.out.println("Juega "+game.getTurno().getNombre()+" ("+tipo+")");
         for (char letra : game.getTablero().getAbecedario()) {
@@ -285,6 +280,7 @@ public class Interfaz {
     
     public void ingresarJugada(){
             System.out.println("Ingrese su jugada: ");
+            char letra = ' ';
             String jugada = in.nextLine();
             if(jugada.length()==1){
                 if(jugada.equalsIgnoreCase("x")){
@@ -299,6 +295,7 @@ public class Interfaz {
                     System.out.println("El largo de la jugada es mayor al ingresado en la configuración de la partida ("+sys.getLargoDefault()+")");
                 }
                 char direccion = jugada.charAt(2);
+                letra = direccion;
                 switch (direccion) {
                     case 'Q': case 'C': direccion = '\\'; break;
                     case 'E': case 'Z': direccion = '/'; break;
@@ -315,7 +312,7 @@ public class Interfaz {
                    System.out.println("Jugada fuera de rango, reintente nuevamente");
                    ingresarJugada();
                 }else{
-                    game.realizarJugada(posiciones,direccion);
+                    game.realizarJugada(posiciones,direccion,letra);
                     sys.setMaximoBandas(sys.getMaximoBandas()-1);
                 }
             }
@@ -327,12 +324,13 @@ public class Interfaz {
     public void empezarPartida(){
         elegirJugador();
         while(sys.getMaximoBandas()> 0 &&!abandono){
-            cargarTablero();
-            System.out.println("Presione X si desea abandonar la partida (gana su adversario) o H si desea ver el historial de jugadas realizadas");
-            ingresarJugada();
             if(!abandono){
                 game.cambiarTurno();
             }
+            cargarTablero();
+            System.out.println("Presione X si desea abandonar la partida (gana su adversario) o H si desea ver el historial de jugadas realizadas");
+            ingresarJugada();
+
             
             
         }

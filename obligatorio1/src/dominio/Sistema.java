@@ -106,7 +106,7 @@ public class Sistema {
         try {
             //Posibilidades: Jugada por defecto, fila ingresada es solo de astersicos, validar cada casilla ingresada
             char letra = input.charAt(0);
-            int fila = 2 * (Integer.parseInt(input.substring(1, 2)) - 1);
+            int fila = game.getTablero().filaAsteriscoANumeroReal(Integer.parseInt(input.substring(1, 2)));
             char direccion = input.charAt(2);
             int largo = Integer.parseInt(input.substring(3, 4));
             char[] abc = game.getTablero().getAbecedario();

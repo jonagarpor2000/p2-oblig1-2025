@@ -88,14 +88,18 @@ public class Partida {
     direccion item a escribir
     */
     //Lo mejor es recibir el string original
-    public boolean realizarJugada(int jugada[][],char direccion) {
-        boolean jugadaCorrecta = false;
-        //colocarBandas(int fila, int columna, int[][] posOrigDest,char tipoBanda) {
-        if (tablero.colocarBandasD(jugada,direccion)) {
-            
-            return jugadaCorrecta = true;
+    public boolean realizarJugada(int[][] jugada, char direccion,char dirJugada) {
+        boolean esJ1 = (turno == j1);
+        int puntos = tablero.colocarBandas(jugada, direccion, esJ1, dirJugada);
+        if (puntos > 0) {
+            if (esJ1){
+                setPuntosBlanco(getPuntosBlanco() + puntos);
+            }
+            else {
+                setPuntosNegro(getPuntosNegro() + puntos);
+            }
         }
-        return jugadaCorrecta;
+        return puntos > 0;
     }
 
     /*
