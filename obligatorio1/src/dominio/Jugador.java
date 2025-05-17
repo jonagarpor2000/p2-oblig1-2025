@@ -105,6 +105,15 @@ public static class CriterioAlfabetico implements Comparator <Jugador>{
 
 }
 
+public static class CriterioPorPuntaje implements Comparator <Jugador>{
+
+    @Override
+    public int compare(Jugador p1, Jugador p2){
+        return p2.getPuntaje() - p2.getPuntaje();
+    }
+
+}
+
     
     
 }

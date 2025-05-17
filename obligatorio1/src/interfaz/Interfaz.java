@@ -325,7 +325,10 @@ public class Interfaz {
             cargarTablero();
             System.out.println("Presione X si desea abandonar la partida (gana su adversario) o H si desea ver el historial de jugadas realizadas");
             ingresarJugada();
-            game.cambiarTurno();
+            if(!abandono){
+                game.cambiarTurno();
+            }
+            
             
         }
         Jugador ganador;
@@ -334,6 +337,8 @@ public class Interfaz {
         }else{
             ganador = game.verificarGanador(false);
         }
+        abandono = false;
+        ganador.anotarVictoria();
         this.fuegosArtificiales(ganador.getNombre());
     }
 }

@@ -65,20 +65,14 @@ public class Sistema {
     }
 
     public void ordenarScoreDec() {
-        Collections.sort(listaJugadores, new CriterioScoreDecreciente());
+        Collections.sort(listaJugadores, new Jugador.CriterioPorPuntaje());
     }
 
     public void ordenarJugadorAlfabeticamente() {
         Collections.sort(listaJugadores, new Jugador.CriterioAlfabetico());
     }
 
-    private class CriterioScoreDecreciente implements Comparator<Jugador> {
 
-        @Override
-        public int compare(Jugador p1, Jugador p2) {
-            return p2.getPuntaje() - p2.getPuntaje();
-        }
-    }
 
     public void setConfiguraciones(int largoBandas, boolean contacto, int cantBandas, int cantTableros) {
         this.setLargoDefault(largoBandas);
