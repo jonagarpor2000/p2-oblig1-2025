@@ -215,6 +215,44 @@ public class Tablero {
         }
         return true;
     }
+    
+    public boolean verificarTriangulos(int fila, int columna, int filaDest, int colDest, char ficha){
+        boolean colocado = false;
+        try{
+
+            //Controlar casos de primer y ultima fila
+            if(tablero[fila+1][columna]=='■' || tablero[fila+1][columna]=='□'){
+                System.out.println("Encontré triangulos");
+            }else{
+                if(fila < filaDest && columna > colDest && !colocado){ // Voy con direccion Z
+                   if ((tablero[fila+1][columna-1]=='\\' || tablero[fila+1][columna-1]=='/')&&(tablero[fila+1][columna+1]=='\\' || tablero[fila+1][columna+1]=='/')){
+                       tablero[fila+1][columna] = ficha;
+                       colocado=true;
+                   }
+                }
+                if(fila > filaDest && columna < colDest && !colocado){ // Voy con direccion E
+                   if ((tablero[fila-1][columna-1]=='\\' || tablero[fila-1][columna-1]=='/')&&(tablero[fila+1][columna+1]=='\\' || tablero[fila+1][columna+1]=='/')){
+                       tablero[fila+1][columna] = ficha;
+                       colocado=true;
+                   }
+                }
+                if(fila < filaDest && columna < colDest && !colocado){ // Voy con direccion C (Revisando)
+                   if ((tablero[fila+1][columna-1]=='\\' || tablero[fila+1][columna-1]=='/')&&( tablero[fila-1][columna+1]=='\\' || tablero[fila-1][columna+1]=='/')&&(tablero[fila+2][columna]=='-')){
+                       tablero[fila+1][columna] = ficha;
+                       colocado=true;
+                   }
+                }
+                    //Falta implementar direcciones Q,D,A
+
+            }
+        
+        }catch(ArrayIndexOutOfBoundsException e){
+            
+        }
+        
+        
+        return colocado;
+    }
 
 
 }

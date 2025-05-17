@@ -293,6 +293,11 @@ public class Interfaz {
                     System.out.println("El historial de jugadas es: "+game.getTablero().getHistorialJugadas());
                 }
             }else{
+                if(!Character.isDigit(jugada.charAt(jugada.length()-1))){
+                        jugada+=sys.getLargoDefault();
+                }else if ((Integer.parseInt(""+jugada.charAt(jugada.length()-1)))>sys.getLargoDefault()){
+                    System.out.println("El largo de la jugada es mayor al ingresado en la configuración de la partida ("+sys.getLargoDefault()+")");
+                }
                 char direccion = jugada.charAt(2);
                 switch (direccion) {
                     case 'Q': case 'C': direccion = '\\'; break;
