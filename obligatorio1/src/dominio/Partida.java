@@ -91,7 +91,7 @@ public class Partida {
     public boolean realizarJugada(int jugada[][],char direccion) {
         boolean jugadaCorrecta = false;
         //colocarBandas(int fila, int columna, int[][] posOrigDest,char tipoBanda) {
-        if (tablero.colocarBandasC(jugada,direccion)) {
+        if (tablero.colocarBandasD(jugada,direccion)) {
             
             return jugadaCorrecta = true;
         }
